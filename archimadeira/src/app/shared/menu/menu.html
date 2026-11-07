@@ -1,0 +1,22 @@
+<header class="cabecalho">
+  <div class="container cabecalho__conteudo">
+    <a routerLink="/" class="marca" aria-label="Archimadeira, página inicial">
+      <img src="/assets/icons/chair-logo.png" alt="">
+      <span class="logo">ARCHIMADEIRA</span>
+    </a>
+
+    <nav class="menu" aria-label="Navegação principal">
+
+      <a routerLink="/carrinho" routerLinkActive="menu__link--ativo" class="menu__link menu__link--carrinho">
+        <img src="/assets/icons/cart.svg" alt="" class="menu__icon">
+        <span>Carrinho</span>
+      </a>
+      <a routerLink="/admin/produtos" routerLinkActive="menu__link--ativo" class="menu__link">Painel Admin</a>
+    </nav>
+
+    <div class="cabecalho__acoes">
+      <a routerLink="/login" class="cabecalho__entrar" aria-label="Entrar, página de login em construção">Entrar</a>
+      <a routerLink="/cadastro" class="botao botao--escuro">Cadastre-se</a>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,46 @@
+/* Fundo e conteúdo principal do rodapé */
+.rodape {
+  background: var(--cor-rodape);
+  color: #d8ccc1;
+}
+
+.rodape__conteudo {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 32px;
+  padding-top: 40px;
+  padding-bottom: 32px;
+}
+
+.rodape__marca {
+  max-width: 330px;
+}
+
+.rodape__logo {
+  margin-bottom: 10px;
+  color: #fff;
+  font-size: 20px;
+  letter-spacing: 2px;
+}
+
+.rodape__descricao {
+  font-size: 12px;
+  line-height: 1.6;
+}
+/* ========== */
+
+/* Faixa inferior do rodapé */
+.rodape__base {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 16px;
+  padding-bottom: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: #a3948a;
+  font-size: 11px;
+}
+/* ========== */
+

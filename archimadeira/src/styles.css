@@ -1,0 +1,328 @@
+:root {
+	--cor-fundo: #f7f4f0;
+	--cor-superficie: #ffffff;
+	--cor-texto: #2b2018;
+	--cor-texto-suave: #7a6a5d;
+	--cor-borda: #e6ded5;
+	--cor-madeira: #c0562a;
+	--cor-madeira-clara: #fdf1ea;
+	--cor-escura: #1d130d;
+	--cor-sucesso: #2f7a4d;
+	--cor-erro: #c0392b;
+	--cor-fundo-etapas: #f1ece6;
+	--cor-rodape: #2a1a10;
+	--raio: 6px;
+	--sombra-suave: 0 1px 3px rgba(43, 32, 24, 0.06);
+	--largura-container: 1180px;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+button,
+input,
+select,
+textarea {
+	font: inherit;
+}
+
+button {
+	cursor: pointer;
+}
+
+ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+img {
+	display: block;
+	max-width: 100%;
+}
+
+:where(app-carrinho, app-admin-produtos, app-admin-clientes, app-cadastro, app-menu, app-footer) {
+	display: block;
+}
+
+:where(app-carrinho, app-admin-produtos, app-admin-clientes, app-menu) {
+	font-size: 14px;
+	line-height: 1.5;
+}
+
+.container {
+	width: 100%;
+	max-width: var(--largura-container);
+	margin: 0 auto;
+	padding-inline: 24px;
+}
+
+.acessivel {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+}
+
+.card,
+.cartao,
+.filters-container,
+.table-container,
+.info-box {
+	background: var(--cor-superficie);
+	border: 1px solid var(--cor-borda);
+	border-radius: var(--raio);
+}
+
+/* Modal compartilhado para operações com clientes */
+:where(app-modal-adicionar-cliente, app-modal-editar-cliente, app-modal-excluir-cliente) {
+	display: contents;
+}
+
+.cliente-modal-backdrop {
+	position: fixed;
+	z-index: 10;
+	inset: 0;
+	display: grid;
+	overflow-y: auto;
+	place-items: center;
+	padding: 20px;
+	background: rgb(29 19 13 / 48%);
+}
+
+.cliente-modal {
+	width: min(100%, 480px);
+	padding: 24px;
+	background: var(--cor-superficie);
+	border: 1px solid var(--cor-borda);
+	border-radius: 6px;
+	box-shadow: 0 16px 50px rgb(29 19 13 / 18%);
+}
+
+.cliente-modal h2 {
+	margin: 0 0 18px;
+	font-family: 'Instrument Serif', Georgia, serif;
+	font-size: 27px;
+	font-weight: 500;
+}
+
+.cliente-modal p {
+	color: var(--cor-texto-suave);
+}
+
+.cliente-modal form {
+	display: grid;
+	gap: 14px;
+}
+
+.cliente-modal label {
+	display: grid;
+	gap: 5px;
+	font-size: 12px;
+	font-weight: 700;
+}
+
+.cliente-modal input,
+.cliente-modal select {
+	width: 100%;
+	min-height: 40px;
+	padding: 8px 10px;
+	color: var(--cor-texto);
+	background: #fff;
+	border: 1px solid var(--cor-borda);
+	border-radius: 4px;
+}
+
+.cliente-modal-erro {
+	color: var(--cor-erro);
+	font-size: 11px;
+	font-weight: 400;
+}
+
+.cliente-modal-acoes {
+	display: flex;
+	justify-content: flex-end;
+	gap: 8px;
+	margin-top: 8px;
+}
+
+.button-button-secondary {
+	color: var(--cor-texto);
+	background: var(--cor-superficie);
+	border-color: var(--cor-borda);
+}
+.button-button-primary {
+	color: #fff;
+	background: var(--cor-madeira);
+	border-radius: 4px;
+}
+
+
+
+/* ========== */
+
+/* Modais de manutenção de produtos */
+:where(app-modal-formulario-produto, app-modal-excluir-produto) {
+	display: contents;
+}
+
+/* Fundo sobreposto e caixa central dos modais de produto */
+.produto-modal-backdrop {
+	position: fixed;
+	z-index: 10;
+	inset: 0;
+	display: grid;
+	overflow-y: auto;
+	place-items: center;
+	padding: 20px;
+	background: rgb(29 19 13 / 48%);
+}
+
+.produto-modal {
+	width: min(100%, 640px);
+	max-height: calc(100vh - 40px);
+	overflow-y: auto;
+	padding: 24px;
+	background: var(--cor-superficie);
+	border: 1px solid var(--cor-borda);
+	border-radius: var(--raio);
+	box-shadow: 0 16px 50px rgb(29 19 13 / 18%);
+}
+
+.produto-modal h2 {
+	margin: 0 0 18px;
+	font-family: 'Instrument Serif', Georgia, serif;
+	font-size: 27px;
+	font-weight: 500;
+}
+
+.produto-modal p {
+	color: var(--cor-texto-suave);
+}
+
+/* Campos do formulário e organização em duas colunas */
+.produto-modal form {
+	display: grid;
+	gap: 18px;
+}
+
+.produto-form-grid {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 14px;
+}
+
+.produto-modal label {
+	display: grid;
+	gap: 5px;
+	font-size: 12px;
+	font-weight: 700;
+}
+
+.produto-modal input,
+.produto-modal select {
+	width: 100%;
+	min-height: 40px;
+	padding: 8px 10px;
+	color: var(--cor-texto);
+	background: var(--cor-superficie);
+	border: 1px solid var(--cor-borda);
+	border-radius: 4px;
+}
+
+/* Link da imagem e prévia exibida no formulário */
+.produto-imagem-campo {
+	display: grid;
+	gap: 8px;
+}
+
+.produto-imagem-preview {
+	width: 112px;
+	height: 112px;
+	object-fit: cover;
+	border: 1px solid var(--cor-borda);
+	border-radius: 4px;
+}
+
+/* Botões de cancelar, salvar e confirmar exclusão */
+.produto-modal-acoes {
+	display: flex;
+	justify-content: flex-end;
+	gap: 8px;
+	margin-top: 4px;
+}
+
+.produto-modal-botao {
+	min-height: 38px;
+	padding: 8px 14px;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	font-size: 12px;
+	font-weight: 700;
+}
+
+.produto-modal-primario {
+	color: var(--cor-superficie);
+	background: var(--cor-madeira);
+}
+
+.produto-modal-secundario {
+	color: var(--cor-texto);
+	background: var(--cor-superficie);
+	border-color: var(--cor-borda);
+}
+
+.produto-modal-perigo {
+	color: var(--cor-superficie);
+	background: var(--cor-erro);
+}
+
+.produto-modal :where(input, select, button):focus-visible {
+	outline: 2px solid var(--cor-madeira);
+	outline-offset: 2px;
+}
+
+@media (max-width: 560px) {
+	.produto-modal {
+		padding: 18px;
+	}
+
+	.produto-form-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.produto-modal-acoes {
+		flex-direction: column-reverse;
+	}
+
+	.produto-modal-botao {
+		width: 100%;
+	}
+}
+/* ========== */
+
+@media (prefers-reduced-motion: reduce) {
+	* {
+		transition: none !important;
+	}
+}
+
+html,
+body {
+	min-height: 100%;
+	margin: 0;
+}
+
+body {
+	background: var(--cor-fundo);
+	color: var(--cor-texto);
+	font-family: Arial, Helvetica, sans-serif;
+}
