@@ -1,1 +1,63 @@
-<p>admin clientes works!</p>
+<div class="content-container">
+    <div class="cabecalho">
+        <div>
+            <span class="subtitulo">
+                ÁREA ADMINISTRATIVA
+            </span>
+            <h1>Clientes</h1>
+            <p>
+                Gerencie os clientes cadastrados na plataforma.
+            </p>
+        </div>
+        <button class="botao-novo" type="button">
+            + Novo cliente
+        </button>
+    </div>
+    <div class="tabela-container">
+        <div style="overflow-x: auto;">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Sobrenome</th>
+                    <th>Data de Nascimento</th>
+                    <th>Email</th>
+                    <th>Cep</th>
+                    <th>Logradouro</th>
+                    <th>Complemento</th>
+                    <th>Bairro</th>
+                    <th>Cidade</th>
+                    <th>Estado</th>
+                    <th>Municipio</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (cliente of listaClientes; track cliente.id) {
+                <tr>
+                    <td>{{ cliente.id }}</td>
+                    <td>{{ cliente.nome }}</td>
+                    <td>{{ cliente.sobrenome }}</td>
+                    <td>{{ cliente.dtNascimento }}</td>
+                    <td>{{ cliente.cep }}</td>
+                    <td>{{ cliente.logradouro }}</td>
+                    <td>{{ cliente.complemento }}</td>
+                    <td>{{ cliente.bairro }}</td>
+                    <td>{{ cliente.cidade }}</td>
+                    <td>{{ cliente.estado }}</td>
+                    <td>{{ cliente.municipio }}</td>
+                    <td class="acoes">
+                        <button class="botao-editar" type="button" (click)="editar(cliente.id)">
+                            Editar
+                        </button>
+                        <button class="botao-excluir" type="button" (click)="excluir(cliente.id)">
+                            Excluir
+                        </button>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>

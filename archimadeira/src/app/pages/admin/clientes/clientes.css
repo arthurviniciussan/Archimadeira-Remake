@@ -1,0 +1,108 @@
+.content-container {
+  justify-content: center;
+  padding: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: inherit;
+  color: #333;
+  box-sizing: border-box;
+}
+.cabecalho {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-items: center;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #eaeaea;
+    padding-bottom: 15px;
+    width: 100%;
+}
+.tabela-container {
+    background:white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    max-height: 100%;
+    overflow-x: auto;
+}
+.cabecalho .subtitulo {
+    font-size: 12px;
+    font-weight: bold;
+    color: #8c6239;
+    letter-spacing: 1px;
+}
+.cabecalho .h1{
+    font-size: 28px;
+    color: #2c2c2c;
+    margin: 5px 0;
+}
+.cabecalho p {
+    color: #666;
+    font-size: 14px;
+    margin: 0;
+}
+.botao-novo {
+    background-color: #2c2c2c;
+    color: white;
+    border: none;
+    padding: 10px 18px; 
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+.botao-novo:hover {
+    background-color: #8c6239;
+}
+table {
+    width: 100%;
+    min-width: 1200px;
+    border-collapse: separate;
+    border-spacing: 0;
+    text-align: left;
+    font-size: 13px;
+}
+.th, .td {
+    padding: 12px 10px;
+    border-bottom: 1px solid #eee;
+    white-space: nowrap;
+}
+.th {
+    background-color: #f8f9fa;
+    color: #444;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+}
+.tbody .tr:hover {
+    background-color: #f9f9f9;
+}
+.td .acoes {
+    display: flex;
+    gap: 8px;
+}
+.botao-editar{
+    background-color: #8c6239;
+    color : white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+}
+.botao-editar:hover {
+    background-color: #6b4a2c;
+}
+.botao-excluir{
+    background-color: #eee;
+    color: #333;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+}   
+.botao-excluir:hover {
+    background-color: #ccc;
+}
