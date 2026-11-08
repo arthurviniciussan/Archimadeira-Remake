@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, } from '@angular/core';
 import { Cliente } from '../models/cliente.model';
 
 @Injectable({
@@ -20,6 +20,7 @@ export class ClienteService {
                 numeroCasa: "700",
                 complemento: "Apto 42",
                 bairro: "Butantã",
+                cidade: "São Paulo",
                 municipio: "São Paulo",
                 estado: "SP"
             },
@@ -34,6 +35,7 @@ export class ClienteService {
                 logradouro: "Rodovia Raposo Tavares",
                 numeroCasa: "1500",
                 bairro: "Jardim Bonfiglioli",
+                cidade: "São Paulo",
                 municipio: "São Paulo",
                 estado: "SP"
             },
@@ -49,6 +51,7 @@ export class ClienteService {
                 numeroCasa: "1000",
                 complemento: "Bloco B",
                 bairro: "Bela Vista",
+                cidade: "São Paulo",
                 municipio: "São Paulo",
                 estado: "SP"
             },
@@ -63,6 +66,7 @@ export class ClienteService {
                 logradouro: "Praça da Sé",
                 numeroCasa: "50",
                 bairro: "Sé",
+                cidade: "São Paulo",
                 municipio: "São Paulo",
                 estado: "SP"
             },
@@ -78,6 +82,7 @@ export class ClienteService {
                 numeroCasa: "4777",
                 complemento: "Torre A",
                 bairro: "Alto de Pinheiros",
+                cidade: "São Paulo",
                 municipio: "São Paulo",
                 estado: "SP"
             },
@@ -93,6 +98,7 @@ export class ClienteService {
                 numeroCasa: "15",
                 complemento: "Bloco C",
                 bairro: "Butantã",
+                cidade: "São Paulo",
                 municipio: "São Paulo",
                 estado: "SP"
             },
@@ -109,6 +115,7 @@ export class ClienteService {
                 complemento: "Conjunto 101",
                 bairro: "Pinheiros",
                 municipio: "São Paulo",
+                cidade: "São Paulo",
                 estado: "SP"
             }
         ];

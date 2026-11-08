@@ -1,4 +1,5 @@
 export interface Cliente {
+cidade: any;
   id: number;
   cpf: string;
   nome: string;

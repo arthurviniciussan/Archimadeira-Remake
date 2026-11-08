@@ -7,7 +7,6 @@ import { AdminClientesComponent } from './pages/admin/clientes/clientes';
 import { AdminProdutosComponent } from './pages/admin/produtos/produtos';
 import { Produtos } from './pages/produtos/produtos';
 import { EditarProduto } from './pages/produtos/editar-produto/editar-produto';
-import { ModalExcluirProdutoComponent } from './pages/produtos/modal-excluir-produto/modal-excluir-produto';
 import { ConsultaProdutos } from './pages/produtos/consulta-produtos/consulta-produtos';
 
 export const routes: Routes = [
