@@ -9,10 +9,28 @@
                 Gerencie os produtos cadastrados na plataforma.
             </p>
         </div>
-        <button class="botao-novo" routerLink="/editar-produto" type="button">+ Novo produto</button>
-        
-        
+        <button class="botao-novo" type="button" (click)="mostrarFormulario = !mostrarFormulario">+ Novo produto</button>
     </div>
+    @if (erro) {
+        <p class="mensagem-erro" role="alert">{{ erro }}</p>
+    }
+    @if (mostrarFormulario) {
+        <form class="formulario-cadastro" #formularioProduto="ngForm" (ngSubmit)="incluirProduto()">
+            <h2>Novo produto</h2>
+            <div class="campos-formulario">
+                <label>Nome<input name="nome" [(ngModel)]="novoProduto.nome" required /></label>
+                <label>Descrição<input name="descricao" [(ngModel)]="novoProduto.descricao" required /></label>
+                <label>Preço<input name="preco" type="number" min="0" step="0.01" [(ngModel)]="novoProduto.preco" required /></label>
+                <label>Estoque<input name="estoque" type="number" min="0" step="1" [(ngModel)]="novoProduto.estoque" required /></label>
+            </div>
+            <div class="acoes-formulario">
+                <button class="botao-cancelar" type="button" (click)="cancelarInclusao()">Cancelar</button>
+                <button class="botao-novo" type="submit" [disabled]="formularioProduto.invalid || salvando">
+                    {{ salvando ? 'Salvando...' : 'Salvar produto' }}
+                </button>
+            </div>
+        </form>
+    }
     <div class="tabela-container">
         <div style="overflow-x: auto;">
             <table>
@@ -32,11 +50,11 @@
                         <td>{{ produto.id }}</td>
                         <td>{{ produto.nome }}</td>
                         <td>{{ produto.descricao }}</td>
-                        <td>{{ produto.preco }}</td>
+                        <td>{{ produto.preco | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</td>
                         <td>{{ produto.estoque }}</td>
                        
                         <td class="acoes">
-                            <button class="botao-editar" [routerLink]="['alterar', produto.id]">Editar</button>
+                            <button class="botao-editar" type="button">Editar</button>
                             
                             <button class="botao-excluir" type="button" (click)="excluir(produto.id)">Excluir</button>
                             

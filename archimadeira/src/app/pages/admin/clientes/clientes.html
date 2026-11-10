@@ -9,43 +9,78 @@
                 Gerencie os clientes cadastrados na plataforma.
             </p>
         </div>
-        <button class="botao-novo" type="button">
+        <button class="botao-novo" type="button" (click)="mostrarFormulario = !mostrarFormulario">
             + Novo cliente
         </button>
     </div>
+    @if (erro) {
+        <p class="mensagem-erro" role="alert">{{ erro }}</p>
+    }
+    @if (mostrarFormulario) {
+        <form class="formulario-cadastro" #formularioCliente="ngForm" (ngSubmit)="incluirCliente()">
+            <h2>Novo cliente</h2>
+            <div class="campos-formulario">
+                <label>CPF<input name="cpf" [(ngModel)]="novoCliente.cpf" required /></label>
+                <label>Nome<input name="nome" [(ngModel)]="novoCliente.nome" required /></label>
+                <label>Sobrenome<input name="sobrenome" [(ngModel)]="novoCliente.sobrenome" required /></label>
+                <label>Data de nascimento<input name="dtNascimento" type="date" [(ngModel)]="novoCliente.dtNascimento" required /></label>
+                <label>Email<input name="email" type="email" [(ngModel)]="novoCliente.email" required /></label>
+                <label>CEP<input name="cep" [(ngModel)]="novoCliente.cep" required /></label>
+                <label>Logradouro<input name="logradouro" [(ngModel)]="novoCliente.logradouro" required /></label>
+                <label>Número<input name="numeroCasa" [(ngModel)]="novoCliente.numeroCasa" required /></label>
+                <label>Complemento<input name="complemento" [(ngModel)]="novoCliente.complemento" /></label>
+                <label>Bairro<input name="bairro" [(ngModel)]="novoCliente.bairro" required /></label>
+                <label>Cidade<input name="cidade" [(ngModel)]="novoCliente.cidade" required /></label>
+                <label>Município<input name="municipio" [(ngModel)]="novoCliente.municipio" required /></label>
+                <label>Estado<input name="estado" [(ngModel)]="novoCliente.estado" required /></label>
+            </div>
+            <div class="acoes-formulario">
+                <button class="botao-cancelar" type="button" (click)="cancelarInclusao()">Cancelar</button>
+                <button class="botao-novo" type="submit" [disabled]="formularioCliente.invalid || salvando">
+                    {{ salvando ? 'Salvando...' : 'Salvar cliente' }}
+                </button>
+            </div>
+        </form>
+    }
     <div class="tabela-container">
         <div style="overflow-x: auto;">
         <table>
             <thead>
                 <tr>
                     <th>ID</th>
+                    <th>CPF</th>
                     <th>Nome</th>
                     <th>Sobrenome</th>
                     <th>Data de Nascimento</th>
                     <th>Email</th>
-                    <th>Cep</th>
+                    <th>CEP</th>
                     <th>Logradouro</th>
+                    <th>Número</th>
                     <th>Complemento</th>
                     <th>Bairro</th>
                     <th>Cidade</th>
+                    <th>Município</th>
                     <th>Estado</th>
-                    <th>Municipio</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
                 @for (cliente of listaClientes; track cliente.id) {
                 <tr>
                     <td>{{ cliente.id }}</td>
+                    <td>{{ cliente.cpf }}</td>
                     <td>{{ cliente.nome }}</td>
                     <td>{{ cliente.sobrenome }}</td>
                     <td>{{ cliente.dtNascimento }}</td>
+                    <td>{{ cliente.email }}</td>
                     <td>{{ cliente.cep }}</td>
                     <td>{{ cliente.logradouro }}</td>
+                    <td>{{ cliente.numeroCasa }}</td>
                     <td>{{ cliente.complemento }}</td>
                     <td>{{ cliente.bairro }}</td>
                     <td>{{ cliente.cidade }}</td>
-                    <td>{{ cliente.estado }}</td>
                     <td>{{ cliente.municipio }}</td>
+                    <td>{{ cliente.estado }}</td>
                     <td class="acoes">
                         <button class="botao-editar" type="button" (click)="editar(cliente.id)">
                             Editar

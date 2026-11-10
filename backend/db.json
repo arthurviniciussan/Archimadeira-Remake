@@ -2,13 +2,17 @@
   "clientes": [
     {
       "id": 1,
-      "nome": "Ana Silva",
+      "cpf": "12345678901",
+      "nome": "Ana",
+      "sobrenome": "Silva",
+      "dtNascimento": "2000-09-25",
       "email": "ana.silva@example.com",
       "cep": "01310-100",
       "logradouro": "Avenida Paulista",
       "numeroCasa": "1000",
       "complemento": "Apto 42",
       "bairro": "Bela Vista",
+      "cidade": "São Paulo",
       "municipio": "São Paulo",
       "estado": "SP"
     }
@@ -17,7 +21,8 @@
     {
       "id": 1,
       "nome": "Cadeira de madeira",
-      "qtd": 10,
+      "descricao": "Cadeira feita de madeira.",
+      "estoque": 10,
       "preco": 349.9
     }
   ]
