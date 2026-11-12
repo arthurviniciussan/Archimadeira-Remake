@@ -1,1 +1,160 @@
-<p>cadastro works!</p>
+<section>
+  <div class="cadastro">
+    <h1>Criar nova conta</h1>
+    <p>Cadastre-se para comprar móveis de qualidade com rapidez e segurança.</p>
+  </div>
+
+  <form class="cadastro-form" (ngSubmit)="salvar()">
+    <fieldset class="cadastro-bloco">
+      <legend>Dados pessoais</legend>
+
+      <label for="nome">Nome</label>
+      <input
+        class="input-simples"
+        type="text"
+        name="nome"
+        id="nome"
+        autocomplete="given-name"
+        placeholder="Ex: Roberto"
+        [(ngModel)]="cliente.nome"
+      />
+
+      <label for="sobrenome">Sobrenome</label>
+      <input
+        class="input-simples"
+        type="text"
+        name="sobrenome"
+        id="sobrenome"
+        autocomplete="family-name"
+        placeholder="Ex: Alencar Silva"
+        [(ngModel)]="cliente.sobrenome"
+      />
+
+      <label for="email">E-mail</label>
+      <input
+        class="input-simples"
+        type="email"
+        name="email"
+        id="email"
+        autocomplete="email"
+        placeholder="seu.email@exemplo.com"
+        [(ngModel)]="cliente.email"
+      />
+
+      <label for="cpf">CPF</label>
+      <input
+        class="input-simples"
+        type="text"
+        name="cpf"
+        id="cpf"
+        inputmode="numeric"
+        placeholder="000.000.000-00"
+        [(ngModel)]="cliente.cpf"
+      />
+
+      <label for="dtNascimento">Data de nascimento</label>
+      <input
+        class="input-simples"
+        type="date"
+        name="dtNascimento"
+        id="dtNascimento"
+        autocomplete="bday"
+        [(ngModel)]="cliente.dtNascimento"
+      />
+    
+      <legend>Endereço de entrega</legend>
+
+      <label for="cep">CEP</label>
+      <input
+        class="input-simples"
+        type="text"
+        name="cep"
+        id="cep"
+        inputmode="numeric"
+        autocomplete="postal-code"
+        placeholder="00000-000"
+        [(ngModel)]="cliente.cep"
+      />
+
+      <label for="logradouro">Rua / Avenida</label>
+      <input
+        class="input-simples"
+        type="text"
+        name="logradouro"
+        id="logradouro"
+        autocomplete="address-line1"
+        placeholder="Ex: Av. Brigadeiro Faria Lima"
+        [(ngModel)]="cliente.logradouro"
+      />
+
+      <label for="numeroCasa">Número</label>
+      <input
+        class="input-simples"
+        type="text"
+        name="numeroCasa"
+        id="numeroCasa"
+        placeholder="1234"
+        [(ngModel)]="cliente.numeroCasa"
+      />
+
+      <label for="complemento">Complemento (opcional)</label>
+      <input
+        class="input-simples"
+        type="text"
+        name="complemento"
+        id="complemento"
+        autocomplete="address-line2"
+        placeholder="Apto 42, Bloco B"
+        [(ngModel)]="cliente.complemento"
+      />
+
+      <label for="bairro">Bairro</label>
+      <input
+        class="input-simples"
+        type="text"
+        name="bairro"
+        id="bairro"
+        placeholder="Pinheiros"
+        [(ngModel)]="cliente.bairro"
+      />
+
+      <label for="municipio">Município</label>
+      <input
+        class="input-simples"
+        type="text"
+        name="municipio"
+        id="municipio"
+        autocomplete="address-level2"
+        placeholder="São Paulo"
+        [(ngModel)]="cliente.municipio"
+      />
+
+      <label for="estado">Estado</label>
+      <input
+        class="input-simples"
+        type="text"
+        name="estado"
+        id="estado"
+        maxlength="2"
+        autocomplete="address-level1"
+        placeholder="SP"
+        [(ngModel)]="cliente.estado"
+      />
+      <label for="senha">Senha</label>
+    <input
+      class="input-simples"
+      id="senha"
+      name="senha"
+      type="password"
+      placeholder="Digite sua senha"
+      [(ngModel)]="cliente.senha"
+    />
+    </fieldset>
+
+    <button type="submit">Finalizar cadastro</button>
+  </form>
+
+  <div class="cadastro-footer">
+    <p>Já tem uma conta? <a routerLink="/login">Entrar</a></p>
+  </div>
+</section>
