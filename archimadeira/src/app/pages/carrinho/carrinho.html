@@ -1,1 +1,81 @@
-<p>carrinho works!</p>
+<section class="etapas">
+  <div class="container etapas__lista">
+    <span class="etapa etapa--ativa"><span class="etapa__numero">1</span> Carrinho (Ativo)</span>
+    <span class="etapa"><span class="etapa__numero">2</span> Identificação</span>
+    <span class="etapa"><span class="etapa__numero">3</span> Entrega Especializada</span>
+    <span class="etapa"><span class="etapa__numero">4</span> Pagamento</span>
+  </div>
+</section>
+
+<div class="container conteudo">
+  <header class="conteudo__titulo">
+    <p class="selo">Cesto curado &amp; marcenaria exclusiva</p>
+    <h1>Carrinho de Compras</h1>
+  </header>
+
+  <div class="grade">
+    <div>
+      <section class="cartao adicionar">
+        <h2 class="cartao__titulo">Adicionar produto</h2>
+        <ul class="lista-produtos">
+          @for (produto of listaProdutos; track produto.id) {
+            <li class="produto">
+              <span class="produto__nome">{{ produto.nome }}</span>
+              <span class="produto__info">{{ produto.preco | currency:'BRL':'symbol':'1.2-2':'pt-BR' }} · Estoque: {{ produto.estoque }}</span>
+              <button type="button" class="botao--principal produto__botao" (click)="adicionar(produto)">Adicionar</button>
+            </li>
+          }
+        </ul>
+      </section>
+
+      <section class="cartao carrinho">
+        <header class="carrinho__cabecalho">
+          <h2 class="cartao__titulo">Seu Carrinho <span class="carrinho__contador">({{ listaItens.length }} itens)</span></h2>
+          <button type="button" class="link link--perigo" (click)="esvaziar()">Esvaziar carrinho</button>
+        </header>
+
+        <ul class="lista-itens">
+          @for (item of listaItens; track item.id) {
+            <li class="item">
+              <div class="item__imagem">
+                <img src="{{ item.imagem }}" alt="{{ item.nome }}">
+              </div>
+
+              <div class="item__dados">
+                <h3 class="item__nome">{{ item.nome }}</h3>
+                <p class="item__estoque">Estoque: {{ item.estoque }} unidades</p>
+                <div class="quantidade">
+                  <button type="button" class="quantidade__botao" (click)="diminuir(item)">&minus;</button>
+                  <span class="quantidade__valor">{{ item.quantidade }}</span>
+                  <button type="button" class="quantidade__botao" (click)="aumentar(item)">+</button>
+                </div>
+              </div>
+
+              <div class="item__valores">
+                <p class="item__unitario">Unitário: {{ item.preco | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</p>
+                <p class="item__total">{{ item.preco * item.quantidade | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</p>
+                <div class="item__acoes">
+                  <button type="button" class="link" (click)="remover(item.id)">Remover</button>
+                </div>
+              </div>
+            </li>
+          }
+        </ul>
+      </section>
+    </div>
+
+    <aside class="resumo-lateral">
+      <section class="cartao resumo">
+        <header class="resumo__cabecalho">
+          <h2 class="cartao__titulo">Resumo do pedido</h2>
+          <span class="resumo__contagem">{{ calcularUnidades() }} unidades</span>
+        </header>
+        <div class="resumo__total">
+          <span>Total</span>
+          <strong>{{ calcularTotal() | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</strong>
+        </div>
+        <button type="button" class="botao--principal">Finalizar compra</button>
+      </section>
+    </aside>
+  </div>
+</div>
