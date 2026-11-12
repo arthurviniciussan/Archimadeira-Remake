@@ -13,4 +13,5 @@ export interface Cliente {
   bairro: string;
   municipio: string;
   estado: string;
+  senha: string;
 }
