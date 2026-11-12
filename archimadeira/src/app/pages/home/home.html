@@ -1,1 +1,49 @@
-<p>home works!</p>
+<main class="home-container">
+  
+  <section class="hero-banner">
+    <div class="hero-content">
+      <span class="badge">COLEÇÃO EXCLUSIVA 2026</span>
+      <h1>MÓVEIS DE QUALIDADE A UM CLIQUE DE VOCÊ</h1>
+      <p>Design autoral, madeira maciça certificada e acabamento premium para transformar a atmosfera do seu lar com conforto inigualável.</p>
+      <button class="btn-primary">CONFIRA ➔</button>
+    </div>
+  </section>
+
+  <section class="section-container">
+    <div class="section-header">
+      <h2>Navegue por Ambientes</h2>
+      <a href="#" class="link-catalogo">Ver catálogo completo ></a>
+    </div>
+    
+    <div class="grid-categorias">
+      <div class="card-categoria" *ngFor="let cat of categorias">
+        <div class="img-placeholder"></div>
+        <h3>{{ cat.nome }}</h3>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-container">
+    <div class="section-header">
+      <h2>Listagem de Produtos</h2>
+    </div>
+
+    <div class="grid-produtos">
+      <div class="card-produto" *ngFor="let prod of produtos">
+        <span class="tag-desconto" *ngIf="prod.desconto">{{ prod.desconto }}</span>
+        <div class="img-placeholder-produto"></div>
+        
+        <div class="produto-info">
+          <h4>{{ prod.nome }}</h4>
+          <p class="preco">R$ {{ prod.preco }} <span class="avista">à vista</span></p>
+          <button class="btn-secundary">🛒 Ver detalhes</button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="btn-center">
+      <button class="btn-outline">Carregar Mais Produtos ↻</button>
+    </div>
+  </section>
+
+</main>
