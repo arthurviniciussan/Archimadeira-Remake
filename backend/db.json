@@ -25,5 +25,16 @@
       "estoque": 10,
       "preco": 349.9
     }
+  ],
+  "carrinho": [
+    {
+      "id": 1,
+      "produtoId": 1,
+      "nome": "Cadeira de madeira",
+      "preco": 349.9,
+      "quantidade": 2,
+      "estoque": 10,
+      "imagem": "/assets/images/cadeira-freijo.webp"
+    }
   ]
 }
