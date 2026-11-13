@@ -17,24 +17,54 @@
       "estado": "SP"
     }
   ],
+  {
   "produtos": [
     {
       "id": 1,
-      "nome": "Cadeira de madeira",
-      "descricao": "Cadeira feita de madeira.",
+      "nome": "Sofá 3 Lugares Retrátil e Reclinável",
+      "descricao": "Sofá confortável de 3 lugares com assentos retráteis e encosto reclinável.",
       "estoque": 10,
-      "preco": 349.9
+      "preco": 5900.00,
+      "desconto": "10% OFF",
+      "imagem": "/assets/images/sofa3lugares.jpeg"
+    },
+    {
+      "id": 2,
+      "nome": "Sofá Retrátil Aramis 2 lugares - 2,90m",
+      "descricao": "Sofá modelo Aramis de 2 lugares com abertura retrátil e 2,90m de largura.",
+      "estoque": 8,
+      "preco": 5400.00,
+      "desconto": "8% OFF",
+      "imagem": "/assets/images/sofa2lugares.jpeg"
+    },
+    {
+      "id": 3,
+      "nome": "Cama de Casal Madeira Maciça",
+      "descricao": "Cama de casal resistente fabricada em madeira maciça nobre.",
+      "estoque": 5,
+      "preco": 4483.00,
+      "desconto": "MADEIRA NOBRE",
+      "imagem": "/assets/images/camaNogueira.jpg"
+    },
+    {
+      "id": 4,
+      "nome": "Mesa de jantar redonda 6 lugares",
+      "descricao": "Mesa de jantar com tampo redondo ideal para acomodar até 6 pessoas.",
+      "estoque": 12,
+      "preco": 1500.00,
+      "desconto": "30% OFF",
+      "imagem": "/assets/images/mesa.jpg"
     }
   ],
-  "carrinho": [
+   "carrinho": [
     {
       "id": 1,
       "produtoId": 1,
-      "nome": "Cadeira de madeira",
-      "preco": 349.9,
-      "quantidade": 2,
+      "nome": "Sofá 3 Lugares Retrátil e Reclinável",
+      "preco": 5900.00,
+      "quantidade": 1,
       "estoque": 10,
-      "imagem": "/assets/images/cadeira-freijo.webp"
+      "imagem": "/assets/images/sofa3lugares.jpeg"
     }
   ]
 }
