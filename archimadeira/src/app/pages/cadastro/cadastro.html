@@ -4,7 +4,7 @@
     <p>Cadastre-se para comprar móveis de qualidade com rapidez e segurança.</p>
   </div>
 
-  <form class="cadastro-form" (ngSubmit)="salvar()">
+  <form class="cadastro-form" #formCadastro="ngForm" (ngSubmit)="salvar()">
     <fieldset class="cadastro-bloco">
       <legend>Dados pessoais</legend>
 
@@ -16,6 +16,7 @@
         id="nome"
         autocomplete="given-name"
         placeholder="Ex: Roberto"
+        required
         [(ngModel)]="cliente.nome"
       />
 
@@ -27,6 +28,7 @@
         id="sobrenome"
         autocomplete="family-name"
         placeholder="Ex: Alencar Silva"
+        required
         [(ngModel)]="cliente.sobrenome"
       />
 
@@ -38,6 +40,7 @@
         id="email"
         autocomplete="email"
         placeholder="seu.email@exemplo.com"
+        required
         [(ngModel)]="cliente.email"
       />
 
@@ -49,6 +52,7 @@
         id="cpf"
         inputmode="numeric"
         placeholder="000.000.000-00"
+        required
         [(ngModel)]="cliente.cpf"
       />
 
@@ -59,6 +63,7 @@
         name="dtNascimento"
         id="dtNascimento"
         autocomplete="bday"
+        required
         [(ngModel)]="cliente.dtNascimento"
       />
     
@@ -73,6 +78,7 @@
         inputmode="numeric"
         autocomplete="postal-code"
         placeholder="00000-000"
+        required
         [(ngModel)]="cliente.cep"
       />
 
@@ -84,6 +90,7 @@
         id="logradouro"
         autocomplete="address-line1"
         placeholder="Ex: Av. Brigadeiro Faria Lima"
+        required
         [(ngModel)]="cliente.logradouro"
       />
 
@@ -94,6 +101,7 @@
         name="numeroCasa"
         id="numeroCasa"
         placeholder="1234"
+        required
         [(ngModel)]="cliente.numeroCasa"
       />
 
@@ -115,18 +123,20 @@
         name="bairro"
         id="bairro"
         placeholder="Pinheiros"
+        required
         [(ngModel)]="cliente.bairro"
       />
 
-      <label for="municipio">Município</label>
+      <label for="cidade">Cidade</label>
       <input
         class="input-simples"
         type="text"
-        name="municipio"
-        id="municipio"
+        name="cidade"
+        id="cidade"
         autocomplete="address-level2"
         placeholder="São Paulo"
-        [(ngModel)]="cliente.municipio"
+        required
+        [(ngModel)]="cliente.cidade"
       />
 
       <label for="estado">Estado</label>
@@ -138,6 +148,7 @@
         maxlength="2"
         autocomplete="address-level1"
         placeholder="SP"
+        required
         [(ngModel)]="cliente.estado"
       />
       <label for="senha">Senha</label>
@@ -147,11 +158,28 @@
       name="senha"
       type="password"
       placeholder="Digite sua senha"
+      minlength="6"
+      required
       [(ngModel)]="cliente.senha"
+    />
+    <label for="confirmarSenha">Confirmar senha</label>
+    <input
+      class="input-simples"
+      id="confirmarSenha"
+      name="confirmarSenha"
+      type="password"
+      placeholder="Confirme sua senha"
+      required
+      [(ngModel)]="confirmarSenha"
     />
     </fieldset>
 
-    <button type="submit">Finalizar cadastro</button>
+    @if (erro) {
+      <p role="alert">{{ erro }}</p>
+    }
+    <button type="submit" [disabled]="formCadastro.invalid || salvando">
+      {{ salvando ? 'Salvando...' : 'Finalizar cadastro' }}
+    </button>
   </form>
 
   <div class="cadastro-footer">

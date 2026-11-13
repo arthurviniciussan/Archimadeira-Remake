@@ -11,7 +11,6 @@ export interface Cliente {
   numeroCasa: string;
   complemento?: string;
   bairro: string;
-  municipio: string;
   estado: string;
-  senha: string;
+  senha?: string;
 }

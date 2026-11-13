@@ -8,6 +8,7 @@ export interface NovoProduto {
   descricao: string;
   estoque: number;
   preco: number;
+  imagem: string;
 }
 
 @Injectable({

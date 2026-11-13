@@ -41,6 +41,7 @@
 }
 
 .btn-primary {
+  display: inline-block;
   background-color: #FFF;
   color: #3E2723;
   border: none;
@@ -49,6 +50,7 @@
   border-radius: 4px;
   cursor: pointer;
   transition: 0.3s;
+  text-decoration: none;
 }
 
 .btn-primary:hover {
@@ -143,6 +145,8 @@
 .img-placeholder-produto {
   background-color: #EFEFEF;
   height: 160px;
+  width: 100%;
+  object-fit: cover;
   border-radius: 4px;
   margin-bottom: 15px;
 }

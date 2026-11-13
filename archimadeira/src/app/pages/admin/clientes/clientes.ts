@@ -11,7 +11,7 @@ import { ClientesService, NovoCliente } from '../../../services/clientes.service
   styleUrl: './clientes.css',
 })
 export class AdminClientesComponent implements OnInit {
-  private readonly service = inject(ClientesService);
+  service = inject(ClientesService);
 
   listaClientes: Cliente[] = [];
 
@@ -24,7 +24,7 @@ export class AdminClientesComponent implements OnInit {
     this.carregarClientes();
   }
 
-  private carregarClientes(): void {
+  carregarClientes(): void {
     this.service.listar().subscribe({
       next: (clientes) => {
         this.listaClientes = clientes;
@@ -79,7 +79,7 @@ export class AdminClientesComponent implements OnInit {
     this.mostrarFormulario = false;
   }
 
-  private clienteVazio(): NovoCliente {
+  clienteVazio(): NovoCliente {
     return {
       cpf: '',
       nome: '',
@@ -92,7 +92,6 @@ export class AdminClientesComponent implements OnInit {
       complemento: '',
       bairro: '',
       cidade: '',
-      municipio: '',
       estado: '',
     };
   }
