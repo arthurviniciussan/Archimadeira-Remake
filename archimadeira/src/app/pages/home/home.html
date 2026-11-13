@@ -12,12 +12,11 @@
   <section class="section-container">
     <div class="section-header">
       <h2>Navegue por Ambientes</h2>
-      <a href="#" class="link-catalogo">Ver catálogo completo ></a>
     </div>
     
     <div class="grid-categorias">
       <div class="card-categoria" *ngFor="let cat of categorias">
-        <div class="img-placeholder"></div>
+        <img [src]="cat.imagem" [alt]="cat.nome" class="img-placeholder" />
         <h3>{{ cat.nome }}</h3>
       </div>
     </div>
@@ -31,12 +30,12 @@
     <div class="grid-produtos">
       <div class="card-produto" *ngFor="let prod of produtos">
         <span class="tag-desconto" *ngIf="prod.desconto">{{ prod.desconto }}</span>
-        <div class="img-placeholder-produto"></div>
+        <img [src]="prod.imagem" [alt]="prod.nome" class="img-placeholder-produto" />
         
         <div class="produto-info">
           <h4>{{ prod.nome }}</h4>
           <p class="preco">R$ {{ prod.preco }} <span class="avista">à vista</span></p>
-          <button class="btn-secundary">🛒 Ver detalhes</button>
+          <button class="btn-secundary">Adicionar ao carrinho 🛒</button>
         </div>
       </div>
     </div>

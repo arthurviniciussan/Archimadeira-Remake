@@ -24,7 +24,7 @@ export class CadastroComponent {
       alert('As senhas não são iguais.');
       return;
     }
-    this.clientesService.incluir(this.cliente.id).subscribe({
+    this.clientesService.incluir(this.cliente).subscribe({
       next: (cliente)=> {
         alert(`cliente ${cliente.nome} criado com id ${cliente  .id}`);
         this.router.navigate(["/admin-clientes-listar"])
