@@ -1,23 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Cliente } from '../models/cliente.model';
 
-export interface NovoCliente {
-  cpf: string;
-  nome: string;
-  sobrenome: string;
-  dtNascimento: string;
-  email: string;
-  cep: string;
-  logradouro: string;
-  numeroCasa: string;
-  complemento?: string;
-  bairro: string;
-  cidade: string;
-  municipio: string;
-  estado: string;
-}
+export type NovoCliente = Omit<Cliente, 'id'>;
 
 @Injectable({
   providedIn: 'root',
@@ -28,6 +14,14 @@ export class ClientesService {
 
   listar(): Observable<Cliente[]> {
     return this.http.get<Cliente[]>(this.api);
+  }
+
+  autenticar(email: string, senha: string): Observable<Cliente | null> {
+    return this.listar().pipe(
+      map((clientes) => clientes.find(
+        (cliente) => cliente.email.toLowerCase() === email.trim().toLowerCase() && cliente.senha === senha,
+      ) ?? null),
+    );
   }
 
   incluir(cliente: NovoCliente): Observable<Cliente> {

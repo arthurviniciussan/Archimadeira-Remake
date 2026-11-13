@@ -1,7 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Cliente } from '../../models/cliente.model';
-import { ClientesService } from '../../services/clientes.service';
+import { NovoCliente, ClientesService } from '../../services/clientes.service';
 import { Router, RouterLink } from '@angular/router';
 
 @Component({
@@ -13,22 +12,48 @@ import { Router, RouterLink } from '@angular/router';
 })
   
 export class CadastroComponent {
-  private clientesService = inject(ClientesService);
-  private router = inject(Router);
-  cliente: Cliente = {} as Cliente;
-  confirmarSenha = "";
+  clientesService = inject(ClientesService);
+  router = inject(Router);
+  cliente: NovoCliente = this.clienteVazio();
+  confirmarSenha = '';
+  erro = '';
+  salvando = false;
 
   salvar() {
-
     if (this.cliente.senha !== this.confirmarSenha) {
-      alert('As senhas não são iguais.');
+      this.erro = 'As senhas não são iguais.';
       return;
     }
-    this.clientesService.incluir(this.cliente.id).subscribe({
-      next: (cliente)=> {
-        alert(`cliente ${cliente.nome} criado com id ${cliente  .id}`);
-        this.router.navigate(["/admin-clientes-listar"])
-      }
+
+    this.erro = '';
+    this.salvando = true;
+    this.clientesService.incluir(this.cliente).subscribe({
+      next: () => {
+        alert('Cadastro realizado. Entre com seu e-mail e senha.');
+        this.router.navigate(['/login']);
+      },
+      error: () => {
+        this.erro = 'Não foi possível concluir o cadastro. Verifique se o JSON Server está em execução e tente novamente.';
+        this.salvando = false;
+      },
     });
+  }
+
+  clienteVazio(): NovoCliente {
+    return {
+      cpf: '',
+      nome: '',
+      sobrenome: '',
+      dtNascimento: '',
+      email: '',
+      cep: '',
+      logradouro: '',
+      numeroCasa: '',
+      complemento: '',
+      bairro: '',
+      cidade: '',
+      estado: '',
+      senha: '',
+    };
   }
 }

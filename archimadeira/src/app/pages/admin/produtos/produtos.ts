@@ -12,7 +12,7 @@ import { NovoProduto, ProdutosService } from '../../../services/produtos.service
   imports: [CurrencyPipe, FormsModule],
 })
 export class AdminProdutosComponent implements OnInit {
-  private readonly service = inject(ProdutosService);
+  service = inject(ProdutosService);
 
   listaProdutos: Produto[] = [];
   mostrarFormulario = false;
@@ -24,7 +24,7 @@ export class AdminProdutosComponent implements OnInit {
     this.carregarProdutos();
   }
 
-  private carregarProdutos(): void {
+  carregarProdutos(): void {
     this.service.listar().subscribe({
       next: (produtos) => {
         this.listaProdutos = produtos;
@@ -75,12 +75,13 @@ export class AdminProdutosComponent implements OnInit {
     this.mostrarFormulario = false;
   }
 
-  private produtoVazio(): NovoProduto {
+  produtoVazio(): NovoProduto {
     return {
       nome: '',
       descricao: '',
       estoque: 0,
       preco: 0,
+      imagem: '',
     };
   }
 }

@@ -5,7 +5,7 @@
       <span class="badge">COLEÇÃO EXCLUSIVA 2026</span>
       <h1>MÓVEIS DE QUALIDADE A UM CLIQUE DE VOCÊ</h1>
       <p>Design autoral, madeira maciça certificada e acabamento premium para transformar a atmosfera do seu lar com conforto inigualável.</p>
-      <button class="btn-primary">CONFIRA ➔</button>
+      <a class="btn-primary" routerLink="/produtos/consulta">CONFIRA ➔</a>
     </div>
   </section>
 
@@ -26,23 +26,29 @@
   <section class="section-container">
     <div class="section-header">
       <h2>Listagem de Produtos</h2>
+      <a routerLink="/carrinho" class="link-catalogo">Ver carrinho</a>
     </div>
+
+    @if (erro) {
+      <p role="alert">{{ erro }}</p>
+    }
+    @if (mensagem) {
+      <p role="status">{{ mensagem }} <a routerLink="/carrinho">Ir para o carrinho</a></p>
+    }
 
     <div class="grid-produtos">
       <div class="card-produto" *ngFor="let prod of produtos">
         <span class="tag-desconto" *ngIf="prod.desconto">{{ prod.desconto }}</span>
-        <div class="img-placeholder-produto"></div>
+        <img class="img-placeholder-produto" [src]="prod.imagem" [alt]="prod.nome">
         
         <div class="produto-info">
           <h4>{{ prod.nome }}</h4>
-          <p class="preco">R$ {{ prod.preco }} <span class="avista">à vista</span></p>
-          <button class="btn-secundary">🛒 Ver detalhes</button>
+          <p class="preco">{{ prod.preco | currency:'BRL':'symbol':'1.2-2':'pt-BR' }} <span class="avista">à vista</span></p>
+          <button class="btn-secundary" type="button" (click)="adicionarAoCarrinho(prod)" [disabled]="prod.estoque < 1">
+            {{ prod.estoque > 0 ? '🛒 Adicionar ao carrinho' : 'Sem estoque' }}
+          </button>
         </div>
       </div>
-    </div>
-    
-    <div class="btn-center">
-      <button class="btn-outline">Carregar Mais Produtos ↻</button>
     </div>
   </section>
 

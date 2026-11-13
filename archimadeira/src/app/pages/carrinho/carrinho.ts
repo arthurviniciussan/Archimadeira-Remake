@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
-import { ItemCarrinho } from '../../models/item-carrinho.model';
+import { ItemCarrinho, NovoItemCarrinho } from '../../models/item-carrinho.model';
 import { Produto } from '../../models/produto.model';
 import { CarrinhoService } from '../../services/carrinho.service';
 import { ProdutosService } from '../../services/produtos.services';
@@ -12,11 +12,12 @@ import { ProdutosService } from '../../services/produtos.services';
   styleUrl: './carrinho.css'
 })
 export class CarrinhoComponent implements OnInit {
-  private service = inject(CarrinhoService);
-  private produtosService = inject(ProdutosService);
+  service = inject(CarrinhoService);
+  produtosService = inject(ProdutosService);
 
   listaItens: ItemCarrinho[] = [];
   listaProdutos: Produto[] = [];
+  erro = '';
 
   ngOnInit(): void {
     this.carregarItens();
@@ -24,86 +25,122 @@ export class CarrinhoComponent implements OnInit {
     this.produtosService.listar().subscribe({
       next: (produtos) => {
         this.listaProdutos = produtos;
-      }
+      },
+      error: () => {
+        this.erro = 'Não foi possível carregar os produtos. Verifique se o JSON Server está em execução.';
+      },
     });
   }
   
-  carregarItens() {
+  carregarItens(limparErro = true): void {
     this.service.listar().subscribe({
       next: (itens) => {
         this.listaItens = itens;
-      }
+        if (limparErro) {
+          this.erro = '';
+        }
+      },
+      error: () => {
+        this.erro = 'Não foi possível carregar o carrinho. Verifique se o JSON Server está em execução.';
+      },
     });
   }
-  adicionar(produto: Produto) {
+
+  adicionar(produto: Produto): void {
     if (produto.estoque < 1) {
-      alert('Produto sem estoque.');
+      this.erro = 'Produto sem estoque.';
       return;
     }
-    for (let item of this.listaItens) {
-      if (item.produtoId === produto.id) {
-        alert('Este produto já está no carrinho. Use os botões + e − para mudar a quantidade.');
-        return;
-      }
-    }
 
-    let novoItem = {} as ItemCarrinho;
-    novoItem.produtoId = produto.id;
-    novoItem.nome = produto.nome;
-    novoItem.preco = produto.preco;
-    novoItem.estoque = produto.estoque;
-    novoItem.quantidade = 1;
-    novoItem.imagem = '';
+    this.erro = '';
+    const novoItem: NovoItemCarrinho = {
+      produtoId: produto.id,
+      nome: produto.nome,
+      preco: produto.preco,
+      quantidade: 1,
+      estoque: produto.estoque,
+      imagem: produto.imagem,
+    };
 
-    this.service.incluir(novoItem).subscribe({
-      next: () => {
-        this.carregarItens();
-      }
+    this.service.listar().subscribe({
+      next: (itens) => {
+        const existente = itens.find((item) => item.produtoId === produto.id);
+        if (existente && existente.quantidade >= produto.estoque) {
+          this.erro = `Só temos ${produto.estoque} unidades em estoque.`;
+          return;
+        }
+
+        const requisicao = existente
+          ? this.service.alterar({
+            ...existente,
+            quantidade: existente.quantidade + 1,
+            estoque: produto.estoque,
+            preco: produto.preco,
+            imagem: produto.imagem,
+          })
+          : this.service.incluir(novoItem);
+
+        requisicao.subscribe({
+          next: () => this.carregarItens(),
+          error: () => {
+            this.erro = 'Não foi possível adicionar o produto ao carrinho. Tente novamente.';
+          },
+        });
+      },
+      error: () => {
+        this.erro = 'Não foi possível consultar o carrinho. Verifique se o JSON Server está em execução.';
+      },
     });
   }
 
-  aumentar(item: ItemCarrinho) {
+  aumentar(item: ItemCarrinho): void {
     if (item.quantidade >= item.estoque) {
-      alert(`Só temos ${item.estoque} unidades em estoque.`);
+      this.erro = `Só temos ${item.estoque} unidades em estoque.`;
       return;
     }
-    item.quantidade = item.quantidade + 1;
-    this.service.alterar(item).subscribe({
+    this.atualizarQuantidade(item, item.quantidade + 1);
+  }
+
+  diminuir(item: ItemCarrinho): void {
+    if (item.quantidade <= 1) {
+      this.erro = 'A quantidade mínima é 1. Para tirar o produto, use "Remover".';
+      return;
+    }
+    this.atualizarQuantidade(item, item.quantidade - 1);
+  }
+
+  atualizarQuantidade(item: ItemCarrinho, quantidade: number): void {
+    this.erro = '';
+    this.service.alterar({ ...item, quantidade }).subscribe({
       next: (itemAlterado) => {
-        console.log('Quantidade alterada:', itemAlterado.quantidade);
-      }
+        this.listaItens = this.listaItens.map((itemAtual) =>
+          itemAtual.id === itemAlterado.id ? itemAlterado : itemAtual,
+        );
+      },
+      error: () => {
+        this.erro = 'Não foi possível atualizar a quantidade. Tente novamente.';
+      },
     });
   }
 
-  diminuir(item: ItemCarrinho) {
-    if (item.quantidade <= 1) {
-      alert('A quantidade mínima é 1. Para tirar o produto, use "Remover".');
-      return;
-    }
-    item.quantidade = item.quantidade - 1;
-    this.service.alterar(item).subscribe({
-      next: (itemAlterado) => {
-        console.log('Quantidade alterada:', itemAlterado.quantidade);
-      }
-    });
-  }
-  remover(id: number) {
+  remover(id: number): void {
     this.service.excluir(id).subscribe({
       next: () => {
         this.listaItens = this.listaItens.filter(item => item.id !== id);
-      }
+      },
+      error: () => {
+        this.erro = 'Não foi possível remover o item do carrinho. Tente novamente.';
+      },
     });
   }
 
-  esvaziar() {
-    for (let item of this.listaItens) {
-      this.service.excluir(item.id).subscribe({
-        next: () => {
-          console.log('Item removido:', item.nome);
-        }
-      });
+  esvaziar(): void {
+    const itensParaRemover = [...this.listaItens];
+    this.erro = '';
+
+    for (const item of itensParaRemover) {
+      this.remover(item.id);
     }
-    this.listaItens = [];
   }
 
   calcularTotal(): number {

@@ -13,6 +13,10 @@
     <h1>Carrinho de Compras</h1>
   </header>
 
+  @if (erro) {
+    <p role="alert">{{ erro }}</p>
+  }
+
   <div class="grade">
     <div>
       <section class="cartao adicionar">
@@ -20,6 +24,7 @@
         <ul class="lista-produtos">
           @for (produto of listaProdutos; track produto.id) {
             <li class="produto">
+              <img class="produto__imagem" [src]="produto.imagem" [alt]="produto.nome">
               <span class="produto__nome">{{ produto.nome }}</span>
               <span class="produto__info">{{ produto.preco | currency:'BRL':'symbol':'1.2-2':'pt-BR' }} · Estoque: {{ produto.estoque }}</span>
               <button type="button" class="botao--principal produto__botao" (click)="adicionar(produto)">Adicionar</button>
@@ -38,7 +43,7 @@
           @for (item of listaItens; track item.id) {
             <li class="item">
               <div class="item__imagem">
-                <img src="{{ item.imagem }}" alt="{{ item.nome }}">
+                <img [src]="item.imagem || '/assets/images/mesa.jpg'" [alt]="item.nome">
               </div>
 
               <div class="item__dados">

@@ -31,7 +31,6 @@
                 <label>Complemento<input name="complemento" [(ngModel)]="novoCliente.complemento" /></label>
                 <label>Bairro<input name="bairro" [(ngModel)]="novoCliente.bairro" required /></label>
                 <label>Cidade<input name="cidade" [(ngModel)]="novoCliente.cidade" required /></label>
-                <label>Município<input name="municipio" [(ngModel)]="novoCliente.municipio" required /></label>
                 <label>Estado<input name="estado" [(ngModel)]="novoCliente.estado" required /></label>
             </div>
             <div class="acoes-formulario">
@@ -59,7 +58,6 @@
                     <th>Complemento</th>
                     <th>Bairro</th>
                     <th>Cidade</th>
-                    <th>Município</th>
                     <th>Estado</th>
                     <th>Ações</th>
                 </tr>
@@ -79,7 +77,6 @@
                     <td>{{ cliente.complemento }}</td>
                     <td>{{ cliente.bairro }}</td>
                     <td>{{ cliente.cidade }}</td>
-                    <td>{{ cliente.municipio }}</td>
                     <td>{{ cliente.estado }}</td>
                     <td class="acoes">
                         <button class="botao-editar" type="button" (click)="editar(cliente.id)">

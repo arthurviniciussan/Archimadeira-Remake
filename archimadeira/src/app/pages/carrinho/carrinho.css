@@ -259,11 +259,16 @@ button {
 }
 .produto {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto auto;
+  grid-template-columns: 48px minmax(0, 1fr) auto auto;
   align-items: center;
   gap: 16px;
   padding: 12px 0;
   border-top: 1px solid var(--cor-borda);
+}
+.produto__imagem {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
 }
 .produto__nome {
   font-family: 'PT Serif', Georgia, serif;

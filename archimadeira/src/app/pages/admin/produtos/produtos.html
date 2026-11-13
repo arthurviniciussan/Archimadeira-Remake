@@ -22,11 +22,23 @@
                 <label>Descrição<input name="descricao" [(ngModel)]="novoProduto.descricao" required /></label>
                 <label>Preço<input name="preco" type="number" min="0" step="0.01" [(ngModel)]="novoProduto.preco" required /></label>
                 <label>Estoque<input name="estoque" type="number" min="0" step="1" [(ngModel)]="novoProduto.estoque" required /></label>
+                <label>
+                    Imagem
+                    <select name="imagem" [(ngModel)]="novoProduto.imagem" required>
+                        <option value="" disabled>Selecione uma imagem</option>
+                        <option value="/assets/images/sofa3lugares.jpeg">Sofá 3 lugares</option>
+                        <option value="/assets/images/sofa2lugares.jpeg">Sofá Aramis</option>
+                        <option value="/assets/images/camaNogueira.jpg">Cama de casal</option>
+                        <option value="/assets/images/mesa-jantar.png">Mesa de jantar</option>
+                        <option value="/assets/images/mesa.jpg">Mesa</option>
+                        <option value="/assets/images/avatarArquiteto.jpg">Avatar do arquiteto</option>
+                    </select>
+                </label>
             </div>
             <div class="acoes-formulario">
                 <button class="botao-cancelar" type="button" (click)="cancelarInclusao()">Cancelar</button>
                 <button class="botao-novo" type="submit" [disabled]="formularioProduto.invalid || salvando">
-                    {{ salvando ? 'Salvando...' : 'Salvar produto' }}
+                    {{ salvando ? 'Salvar produto' : 'Salvar produto' }}
                 </button>
             </div>
         </form>
@@ -39,6 +51,7 @@
                         <th>ID</th>
                         <th>Nome</th>
                         <th>Descrição</th>
+                        <th>Imagem</th>
                         <th>Preço</th>
                         <th>Estoque</th>
                         <th>Ações</th>
@@ -50,6 +63,7 @@
                         <td>{{ produto.id }}</td>
                         <td>{{ produto.nome }}</td>
                         <td>{{ produto.descricao }}</td>
+                        <td><img [src]="produto.imagem" [alt]="produto.nome" width="64" height="48"></td>
                         <td>{{ produto.preco | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</td>
                         <td>{{ produto.estoque }}</td>
                        

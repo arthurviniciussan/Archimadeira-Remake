@@ -1,0 +1,243 @@
+body {
+    background-color: #f7f4f0;
+    font-family: 'Inter', Arial, sans-serif;
+    margin: 0;
+    padding: 40px 15px;
+    display: flex;
+    justify-content: center;
+}
+
+section {
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 650px;
+    margin: 50px auto;
+    padding: 50px 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    box-sizing: border-box;
+}
+
+.cadastro {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.cadastro::before {
+    content: "ACESSO EXCLUSIVO";
+    display: inline-block;
+    background-color: #fdf3eb;
+    color: #d48351;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+    letter-spacing: 1px;
+}
+
+.cadastro h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    color: #2b211a;
+    margin: 0 0 10px 0;
+    font-weight: 500;
+}
+
+.cadastro p {
+    font-size: 14px;
+    color: #7a7068;
+    margin: 0;
+}
+
+.cadastro-form {
+    width: 100%;
+}
+
+.cadastro-bloco {
+    border: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: 16px;
+}
+
+legend {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: #2b211a;
+    border-bottom: 1px solid #efeae6;
+    padding-bottom: 12px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+}
+
+legend:first-of-type::before { content: "1"; }
+legend:nth-of-type(2)::before { content: "2"; }
+
+legend::before {
+    background-color: #3e322a;
+    color: #ffffff;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
+label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #3e322a;
+    margin-top: 16px;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    align-self: end;
+    display: block;
+}
+
+label::after {
+    content: " *";
+    color: #d9534f;
+}
+
+label[for="complemento"]::after {
+    content: "";
+}
+
+.input-simples {
+    height: 48px;
+    border: 1px solid #dcd3cc;
+    border-radius: 6px;
+    padding: 0 14px;
+    font-size: 14px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    color: #2b211a;
+    transition: border-color 0.3s;
+}
+
+.input-simples:focus {
+    outline: none;
+    border-color: #f37052;
+}
+
+.input-simples::placeholder {
+    color: #b0a8a2;
+}
+
+legend:first-of-type { grid-column: 1 / 13; grid-row: 1; }
+
+label[for="nome"] { grid-column: 1 / 7; grid-row: 2; }
+label[for="sobrenome"] { grid-column: 7 / 13; grid-row: 2; }
+input#nome { grid-column: 1 / 7; grid-row: 3; }
+input#sobrenome { grid-column: 7 / 13; grid-row: 3; }
+
+label[for="email"] { grid-column: 1 / 13; grid-row: 4; }
+input#email { grid-column: 1 / 13; grid-row: 5; }
+
+label[for="cpf"] { grid-column: 1 / 7; grid-row: 6; }
+label[for="dtNascimento"] { grid-column: 7 / 13; grid-row: 6; }
+input#cpf { grid-column: 1 / 7; grid-row: 7; }
+input#dtNascimento { grid-column: 7 / 13; grid-row: 7; }
+
+legend:nth-of-type(2) { grid-column: 1 / 13; grid-row: 8; margin-top: 35px; }
+
+label[for="cep"] { grid-column: 1 / 5; grid-row: 9; }
+label[for="logradouro"] { grid-column: 5 / 13; grid-row: 9; }
+input#cep { grid-column: 1 / 5; grid-row: 10; }
+input#logradouro { grid-column: 5 / 13; grid-row: 10; }
+
+label[for="numeroCasa"] { grid-column: 1 / 4; grid-row: 11; }
+label[for="complemento"] { grid-column: 4 / 9; grid-row: 11; }
+label[for="bairro"] { grid-column: 9 / 13; grid-row: 11; }
+input#numeroCasa { grid-column: 1 / 4; grid-row: 12; }
+input#complemento { grid-column: 4 / 9; grid-row: 12; }
+input#bairro { grid-column: 9 / 13; grid-row: 12; }
+
+label[for="municipio"] { grid-column: 1 / 10; grid-row: 13; }
+label[for="estado"] { grid-column: 10 / 13; grid-row: 13; }
+input#municipio { grid-column: 1 / 10; grid-row: 14; }
+input#estado { grid-column: 10 / 13; grid-row: 14; }
+
+label[for="senha"] { 
+    grid-column: 1 / 13; 
+    grid-row: 15;
+    margin-top: 35px; 
+    border-top: 1px solid #efeae6;
+    padding-top: 25px;
+}
+input#senha { grid-column: 1 / 13; grid-row: 16; }
+
+button[type="submit"] {
+    width: 100%;
+    background-color: #f56d4b;
+    color: #ffffff;
+    border: none;
+    padding: 18px;
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 35px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+    background-color: #e25b3e;
+}
+
+.cadastro-footer {
+    text-align: center;
+    margin-top: 24px;
+}
+
+.cadastro-footer p {
+    font-size: 14px;
+    color: #7a7068;
+}
+
+.cadastro-footer a {
+    color: #2b211a;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.cadastro-footer a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+    section {
+        margin: 20px auto;
+        padding: 30px 20px;
+    }
+    .cadastro-bloco {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+    }
+    label {
+        margin-top: 16px;
+        margin-bottom: 6px;
+    }
+    .input-simples {
+        margin-bottom: 4px;
+    }
+    label[for="senha"] {
+        border-top: none;
+        padding-top: 0;
+    }
+}

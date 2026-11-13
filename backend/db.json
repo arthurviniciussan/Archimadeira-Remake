@@ -1,7 +1,7 @@
 {
   "clientes": [
     {
-      "id": 1,
+      "id": "1",
       "cpf": "12345678901",
       "nome": "Ana",
       "sobrenome": "Silva",
@@ -13,28 +13,104 @@
       "complemento": "Apto 42",
       "bairro": "Bela Vista",
       "cidade": "São Paulo",
-      "municipio": "São Paulo",
       "estado": "SP"
+    },
+    {
+      "cpf": "123123123.32",
+      "nome": "tutu",
+      "sobrenome": "morte",
+      "dtNascimento": "2026-02-24",
+      "email": "pirocagames@gemendo.com",
+      "cep": "04941080",
+      "logradouro": "Negocoi",
+      "numeroCasa": "67",
+      "complemento": "B",
+      "bairro": "casa da mae joana",
+      "cidade": "lugar",
+      "estado": "Sampa",
+      "id": "rmaYZwdRc8U"
     }
   ],
   "produtos": [
     {
-      "id": 1,
-      "nome": "Cadeira de madeira",
-      "descricao": "Cadeira feita de madeira.",
+      "id": "1",
+      "nome": "Sofá 3 Lugares Retrátil e Reclinável",
+      "descricao": "Sofá confortável de 3 lugares com assentos retráteis e encosto reclinável.",
       "estoque": 10,
-      "preco": 349.9
+      "preco": 5900,
+      "desconto": "10% OFF",
+      "imagem": "/assets/images/sofa3lugares.jpeg"
+    },
+    {
+      "id": "2",
+      "nome": "Sofá Retrátil Aramis 2 lugares - 2,90m",
+      "descricao": "Sofá modelo Aramis de 2 lugares com abertura retrátil e 2,90m de largura.",
+      "estoque": 8,
+      "preco": 5400,
+      "desconto": "8% OFF",
+      "imagem": "/assets/images/sofa2lugares.jpeg"
+    },
+    {
+      "id": "3",
+      "nome": "Cama de Casal Madeira Maciça",
+      "descricao": "Cama de casal resistente fabricada em madeira maciça nobre.",
+      "estoque": 5,
+      "preco": 4483,
+      "desconto": "MADEIRA NOBRE",
+      "imagem": "/assets/images/camaNogueira.jpg"
+    },
+    {
+      "id": "4",
+      "nome": "Mesa de jantar redonda 6 lugares",
+      "descricao": "Mesa de jantar com tampo redondo ideal para acomodar até 6 pessoas.",
+      "estoque": 12,
+      "preco": 1500,
+      "desconto": "30% OFF",
+      "imagem": "/assets/images/mesa.jpg"
+    },
+    {
+      "nome": "cadeira",
+      "descricao": "pika",
+      "estoque": 67,
+      "preco": 200,
+      "imagem": "/assets/images/mesa-jantar.png",
+      "id": "OMr2XfZhxUs"
+    },
+    {
+      "nome": "cadeira",
+      "descricao": "pika",
+      "estoque": 1200,
+      "preco": 200,
+      "imagem": "/assets/images/mesa.jpg",
+      "id": "4FE-GwZFe8k"
+    },
+    {
+      "nome": "cadeira",
+      "descricao": "tipo",
+      "estoque": 67,
+      "preco": 250,
+      "imagem": "/assets/images/mesa-jantar.png",
+      "id": "qa9TZjQ-Pn4"
+    },
+    {
+      "nome": "mesa piroca",
+      "descricao": "pika",
+      "estoque": 67,
+      "preco": 200,
+      "imagem": "/assets/images/mesa.jpg",
+      "id": "cGGBEye"
     }
   ],
   "carrinho": [
     {
-      "id": 1,
+      "id": "1",
       "produtoId": 1,
-      "nome": "Cadeira de madeira",
-      "preco": 349.9,
-      "quantidade": 2,
+      "nome": "Sofá 3 Lugares Retrátil e Reclinável",
+      "preco": 5900,
+      "quantidade": 1,
       "estoque": 10,
-      "imagem": "/assets/images/cadeira-freijo.webp"
+      "imagem": "/assets/images/sofa3lugares.jpeg"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

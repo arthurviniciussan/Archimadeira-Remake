@@ -1,32 +1,30 @@
-import { inject, Injectable } from '@angular/core';
-import { ItemCarrinho } from '../models/item-carrinho.model';
 import { HttpClient } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ItemCarrinho, NovoItemCarrinho } from '../models/item-carrinho.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CarrinhoService {
 
-  private API = 'http://localhost:3000/carrinho';
-  private carrinhoHTTP = inject(HttpClient);
-
-  constructor() { }
+  private readonly api = 'http://localhost:3000/carrinho';
+  private readonly http = inject(HttpClient);
 
   listar(): Observable<ItemCarrinho[]> {
-    return this.carrinhoHTTP.get<ItemCarrinho[]>(this.API);
+    return this.http.get<ItemCarrinho[]>(this.api);
   }
 
-  incluir(item: ItemCarrinho): Observable<ItemCarrinho> {
-    return this.carrinhoHTTP.post<ItemCarrinho>(this.API, item);
+  incluir(item: NovoItemCarrinho): Observable<ItemCarrinho> {
+    return this.http.post<ItemCarrinho>(this.api, item);
   }
 
   alterar(item: ItemCarrinho): Observable<ItemCarrinho> {
-    return this.carrinhoHTTP.put<ItemCarrinho>(`${this.API}/${item.id}`, item);
+    return this.http.put<ItemCarrinho>(`${this.api}/${item.id}`, item);
   }
 
   excluir(id: number): Observable<void> {
-    return this.carrinhoHTTP.delete<void>(`${this.API}/${id}`);
+    return this.http.delete<void>(`${this.api}/${id}`);
   }
 
 }
