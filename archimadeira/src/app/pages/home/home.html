@@ -12,12 +12,11 @@
   <section class="section-container">
     <div class="section-header">
       <h2>Navegue por Ambientes</h2>
-      <a href="#" class="link-catalogo">Ver catálogo completo ></a>
     </div>
     
     <div class="grid-categorias">
       <div class="card-categoria" *ngFor="let cat of categorias">
-        <div class="img-placeholder"></div>
+        <img [src]="cat.imagem" [alt]="cat.nome" class="img-placeholder" />
         <h3>{{ cat.nome }}</h3>
       </div>
     </div>

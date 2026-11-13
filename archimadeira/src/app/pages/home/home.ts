@@ -28,8 +28,8 @@ export class HomeComponent implements OnInit {
   categorias = [
     { nome: 'Salas & Sofás', detalhe: 'Mais de 140 modelos', imagem: '/assets/images/sofa2lugares.jpeg' },
     { nome: 'Quartos & Camas', detalhe: 'Camas box e maciças', imagem: '/assets/images/camaNogueira.jpg' },
-    { nome: 'Cozinha & Jantar', detalhe: 'Mesas, cadeiras e aparadores', imagem: '/assets/images/mesa-jantar.png' },
-    { nome: 'Escritório', detalhe: 'Mesas e estantes de trabalho', imagem: '/assets/images/mesa.jpg' }
+    { nome: 'Cozinha & Jantar', detalhe: 'Mesas, cadeiras e aparadores', imagem: '/assets/images/mesa.jpg' },
+    { nome: 'Escritório', detalhe: 'Mesas e estantes de trabalho', imagem: '/assets/images/escritorio.avif' }
   ];
 
   produtos: ProdutoVitrine[] = [];

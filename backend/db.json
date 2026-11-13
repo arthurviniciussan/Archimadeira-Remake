@@ -31,6 +31,7 @@
       "id": "rmaYZwdRc8U"
     }
   ],
+  {
   "produtos": [
     {
       "id": "1",
@@ -101,7 +102,7 @@
       "id": "cGGBEye"
     }
   ],
-  "carrinho": [
+   "carrinho": [
     {
       "id": "1",
       "produtoId": 1,
