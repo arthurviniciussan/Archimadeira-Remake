@@ -87,6 +87,14 @@
     border-radius: 4px;
     font: inherit;
 }
+.campos-formulario select {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 9px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font: inherit;
+}
 .acoes-formulario {
     display: flex;
     justify-content: flex-end;

@@ -1,8 +1,12 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
+import { forkJoin } from 'rxjs';
 import { ItemCarrinho, NovoItemCarrinho } from '../../models/item-carrinho.model';
+import { ItemPedido, NovoPedido } from '../../models/pedido.model';
 import { Produto } from '../../models/produto.model';
+import { AuthService } from '../../services/auth.service';
 import { CarrinhoService } from '../../services/carrinho.service';
+import { PedidosService } from '../../services/pedidos.service';
 import { ProdutosService } from '../../services/produtos.services';
 
 @Component({
@@ -14,10 +18,14 @@ import { ProdutosService } from '../../services/produtos.services';
 export class CarrinhoComponent implements OnInit {
   service = inject(CarrinhoService);
   produtosService = inject(ProdutosService);
+  pedidosService = inject(PedidosService);
+  authService = inject(AuthService);
 
   listaItens: ItemCarrinho[] = [];
   listaProdutos: Produto[] = [];
   erro = '';
+  sucesso = '';
+  finalizando = false;
 
   ngOnInit(): void {
     this.carregarItens();
@@ -141,6 +149,53 @@ export class CarrinhoComponent implements OnInit {
     for (const item of itensParaRemover) {
       this.remover(item.id);
     }
+  }
+
+  finalizarCompra(): void {
+    if (this.listaItens.length === 0 || this.finalizando) {
+      return;
+    }
+
+    this.erro = '';
+    this.sucesso = '';
+    this.finalizando = true;
+
+    const itensPedido: ItemPedido[] = this.listaItens.map((item) => ({
+      produtoId: item.produtoId,
+      nome: item.nome,
+      preco: item.preco,
+      quantidade: item.quantidade,
+      estoque: item.estoque,
+      imagem: item.imagem,
+    }));
+    const pedido: NovoPedido = {
+      usuarioId: this.authService.usuarioAtual?.id ?? null,
+      usuarioEmail: this.authService.usuarioAtual?.email ?? null,
+      data: new Date().toISOString(),
+      produtos: itensPedido,
+      total: this.calcularTotal(),
+    };
+
+    this.pedidosService.incluir(pedido).subscribe({
+      next: () => {
+        const exclusoes = this.listaItens.map((item) => this.service.excluir(item.id));
+        forkJoin(exclusoes).subscribe({
+          next: () => {
+            this.listaItens = [];
+            this.sucesso = 'Compra finalizada e pedido registrado.';
+            this.finalizando = false;
+          },
+          error: () => {
+            this.erro = 'O pedido foi registrado, mas não foi possível limpar o carrinho.';
+            this.finalizando = false;
+          },
+        });
+      },
+      error: () => {
+        this.erro = 'Não foi possível registrar o pedido. O carrinho não foi alterado.';
+        this.finalizando = false;
+      },
+    });
   }
 
   calcularTotal(): number {

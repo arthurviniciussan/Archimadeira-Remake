@@ -9,14 +9,14 @@
                 Gerencie os produtos cadastrados na plataforma.
             </p>
         </div>
-        <button class="botao-novo" type="button" (click)="mostrarFormulario = !mostrarFormulario">+ Novo produto</button>
+        <button class="botao-novo" type="button" (click)="abrirNovoProduto()">+ Novo produto</button>
     </div>
     @if (erro) {
         <p class="mensagem-erro" role="alert">{{ erro }}</p>
     }
     @if (mostrarFormulario) {
-        <form class="formulario-cadastro" #formularioProduto="ngForm" (ngSubmit)="incluirProduto()">
-            <h2>Novo produto</h2>
+        <form class="formulario-cadastro" #formularioProduto="ngForm" (ngSubmit)="salvarProduto()">
+            <h2>{{ produtoEmEdicaoId === null ? 'Novo produto' : 'Editar produto' }}</h2>
             <div class="campos-formulario">
                 <label>Nome<input name="nome" [(ngModel)]="novoProduto.nome" required /></label>
                 <label>Descrição<input name="descricao" [(ngModel)]="novoProduto.descricao" required /></label>
@@ -38,7 +38,7 @@
             <div class="acoes-formulario">
                 <button class="botao-cancelar" type="button" (click)="cancelarInclusao()">Cancelar</button>
                 <button class="botao-novo" type="submit" [disabled]="formularioProduto.invalid || salvando">
-                    {{ salvando ? 'Salvar produto' : 'Salvar produto' }}
+                    {{ salvando ? 'Salvando...' : (produtoEmEdicaoId === null ? 'Salvar produto' : 'Atualizar produto') }}
                 </button>
             </div>
         </form>
@@ -68,7 +68,7 @@
                         <td>{{ produto.estoque }}</td>
                        
                         <td class="acoes">
-                            <button class="botao-editar" type="button">Editar</button>
+                            <button class="botao-editar" type="button" (click)="editarProduto(produto)">Editar</button>
                             
                             <button class="botao-excluir" type="button" (click)="excluir(produto.id)">Excluir</button>
                             

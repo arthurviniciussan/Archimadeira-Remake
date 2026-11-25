@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NovoCliente, ClientesService } from '../../services/clientes.service';
+import { NovoUsuario } from '../../models/usuario.model';
+import { UsuariosService } from '../../services/usuarios.service';
 import { Router, RouterLink } from '@angular/router';
 
 @Component({
@@ -12,22 +13,22 @@ import { Router, RouterLink } from '@angular/router';
 })
   
 export class CadastroComponent {
-  clientesService = inject(ClientesService);
+  usuariosService = inject(UsuariosService);
   router = inject(Router);
-  cliente: NovoCliente = this.clienteVazio();
+  usuario: NovoUsuario = this.usuarioVazio();
   confirmarSenha = '';
   erro = '';
   salvando = false;
 
   salvar() {
-    if (this.cliente.senha !== this.confirmarSenha) {
+    if (this.usuario.senha !== this.confirmarSenha) {
       this.erro = 'As senhas não são iguais.';
       return;
     }
 
     this.erro = '';
     this.salvando = true;
-    this.clientesService.incluir(this.cliente).subscribe({
+    this.usuariosService.incluir(this.usuario).subscribe({
       next: () => {
         alert('Cadastro realizado. Entre com seu e-mail e senha.');
         this.router.navigate(['/login']);
@@ -39,7 +40,7 @@ export class CadastroComponent {
     });
   }
 
-  clienteVazio(): NovoCliente {
+  usuarioVazio(): NovoUsuario {
     return {
       cpf: '',
       nome: '',
@@ -54,6 +55,7 @@ export class CadastroComponent {
       cidade: '',
       estado: '',
       senha: '',
+      tipo: 'usuario',
     };
   }
 }

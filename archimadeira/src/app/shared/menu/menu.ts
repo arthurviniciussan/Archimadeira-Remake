@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-menu',
@@ -8,4 +9,12 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   templateUrl: './menu.html',
   styleUrl: './menu.css',
 })
-export class MenuComponent {}
+export class MenuComponent {
+  readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
+
+  sair(): void {
+    this.authService.sair();
+    this.router.navigate(['/']);
+  }
+}

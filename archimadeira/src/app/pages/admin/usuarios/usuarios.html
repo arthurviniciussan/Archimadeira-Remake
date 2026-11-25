@@ -1,0 +1,101 @@
+<div class="content-container">
+    <div class="cabecalho">
+        <div>
+            <span class="subtitulo">
+                ÁREA ADMINISTRATIVA
+            </span>
+            <h1>Usuários</h1>
+            <p>
+                Gerencie os usuários cadastrados na plataforma.
+            </p>
+        </div>
+        <button class="botao-novo" type="button" (click)="mostrarFormulario = !mostrarFormulario">
+            + Novo usuário
+        </button>
+    </div>
+    @if (erro) {
+        <p class="mensagem-erro" role="alert">{{ erro }}</p>
+    }
+    @if (mostrarFormulario) {
+        <form class="formulario-cadastro" #formularioUsuario="ngForm" (ngSubmit)="incluirUsuario()">
+            <h2>Novo usuário</h2>
+            <div class="campos-formulario">
+                <label>CPF<input name="cpf" [(ngModel)]="novoUsuario.cpf" required /></label>
+                <label>Nome<input name="nome" [(ngModel)]="novoUsuario.nome" required /></label>
+                <label>Sobrenome<input name="sobrenome" [(ngModel)]="novoUsuario.sobrenome" required /></label>
+                <label>Data de nascimento<input name="dtNascimento" type="date" [(ngModel)]="novoUsuario.dtNascimento" required /></label>
+                <label>Email<input name="email" type="email" [(ngModel)]="novoUsuario.email" required /></label>
+                <label>Senha<input name="senha" type="password" [(ngModel)]="novoUsuario.senha" required /></label>
+                <label>Tipo
+                    <select name="tipo" [(ngModel)]="novoUsuario.tipo" required>
+                        <option value="usuario">Usuário</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </label>
+                <label>CEP<input name="cep" [(ngModel)]="novoUsuario.cep" required /></label>
+                <label>Logradouro<input name="logradouro" [(ngModel)]="novoUsuario.logradouro" required /></label>
+                <label>Número<input name="numeroCasa" [(ngModel)]="novoUsuario.numeroCasa" required /></label>
+                <label>Complemento<input name="complemento" [(ngModel)]="novoUsuario.complemento" /></label>
+                <label>Bairro<input name="bairro" [(ngModel)]="novoUsuario.bairro" required /></label>
+                <label>Cidade<input name="cidade" [(ngModel)]="novoUsuario.cidade" required /></label>
+                <label>Estado<input name="estado" [(ngModel)]="novoUsuario.estado" required /></label>
+            </div>
+            <div class="acoes-formulario">
+                <button class="botao-cancelar" type="button" (click)="cancelarInclusao()">Cancelar</button>
+                <button class="botao-novo" type="submit" [disabled]="formularioUsuario.invalid || salvando">
+                    {{ salvando ? 'Salvando...' : 'Salvar usuário' }}
+                </button>
+            </div>
+        </form>
+    }
+    <div class="tabela-container">
+        <div style="overflow-x: auto;">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>CPF</th>
+                    <th>Nome</th>
+                    <th>Sobrenome</th>
+                    <th>Data de Nascimento</th>
+                    <th>Email</th>
+                    <th>Tipo</th>
+                    <th>CEP</th>
+                    <th>Logradouro</th>
+                    <th>Número</th>
+                    <th>Complemento</th>
+                    <th>Bairro</th>
+                    <th>Cidade</th>
+                    <th>Estado</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (usuario of listaUsuarios; track usuario.id) {
+                <tr>
+                    <td>{{ usuario.id }}</td>
+                    <td>{{ usuario.cpf }}</td>
+                    <td>{{ usuario.nome }}</td>
+                    <td>{{ usuario.sobrenome }}</td>
+                    <td>{{ usuario.dtNascimento }}</td>
+                    <td>{{ usuario.email }}</td>
+                    <td>{{ usuario.tipo === 'admin' ? 'Admin' : 'Usuário' }}</td>
+                    <td>{{ usuario.cep }}</td>
+                    <td>{{ usuario.logradouro }}</td>
+                    <td>{{ usuario.numeroCasa }}</td>
+                    <td>{{ usuario.complemento }}</td>
+                    <td>{{ usuario.bairro }}</td>
+                    <td>{{ usuario.cidade }}</td>
+                    <td>{{ usuario.estado }}</td>
+                    <td class="acoes">
+                        <button class="botao-excluir" type="button" (click)="excluir(usuario.id)">
+                            Excluir
+                        </button>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>

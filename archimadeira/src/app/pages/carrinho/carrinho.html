@@ -16,6 +16,9 @@
   @if (erro) {
     <p role="alert">{{ erro }}</p>
   }
+  @if (sucesso) {
+    <p role="status">{{ sucesso }}</p>
+  }
 
   <div class="grade">
     <div>
@@ -79,7 +82,9 @@
           <span>Total</span>
           <strong>{{ calcularTotal() | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</strong>
         </div>
-        <button type="button" class="botao--principal">Finalizar compra</button>
+        <button type="button" class="botao--principal" (click)="finalizarCompra()" [disabled]="listaItens.length === 0 || finalizando">
+          {{ finalizando ? 'Finalizando...' : 'Finalizar compra' }}
+        </button>
       </section>
     </aside>
   </div>

@@ -17,7 +17,7 @@
         autocomplete="given-name"
         placeholder="Ex: Roberto"
         required
-        [(ngModel)]="cliente.nome"
+        [(ngModel)]="usuario.nome"
       />
 
       <label for="sobrenome">Sobrenome</label>
@@ -29,7 +29,7 @@
         autocomplete="family-name"
         placeholder="Ex: Alencar Silva"
         required
-        [(ngModel)]="cliente.sobrenome"
+        [(ngModel)]="usuario.sobrenome"
       />
 
       <label for="email">E-mail</label>
@@ -41,7 +41,7 @@
         autocomplete="email"
         placeholder="seu.email@exemplo.com"
         required
-        [(ngModel)]="cliente.email"
+        [(ngModel)]="usuario.email"
       />
 
       <label for="cpf">CPF</label>
@@ -53,7 +53,7 @@
         inputmode="numeric"
         placeholder="000.000.000-00"
         required
-        [(ngModel)]="cliente.cpf"
+        [(ngModel)]="usuario.cpf"
       />
 
       <label for="dtNascimento">Data de nascimento</label>
@@ -64,7 +64,7 @@
         id="dtNascimento"
         autocomplete="bday"
         required
-        [(ngModel)]="cliente.dtNascimento"
+        [(ngModel)]="usuario.dtNascimento"
       />
     
       <legend>Endereço de entrega</legend>
@@ -79,7 +79,7 @@
         autocomplete="postal-code"
         placeholder="00000-000"
         required
-        [(ngModel)]="cliente.cep"
+        [(ngModel)]="usuario.cep"
       />
 
       <label for="logradouro">Rua / Avenida</label>
@@ -91,7 +91,7 @@
         autocomplete="address-line1"
         placeholder="Ex: Av. Brigadeiro Faria Lima"
         required
-        [(ngModel)]="cliente.logradouro"
+        [(ngModel)]="usuario.logradouro"
       />
 
       <label for="numeroCasa">Número</label>
@@ -102,7 +102,7 @@
         id="numeroCasa"
         placeholder="1234"
         required
-        [(ngModel)]="cliente.numeroCasa"
+        [(ngModel)]="usuario.numeroCasa"
       />
 
       <label for="complemento">Complemento (opcional)</label>
@@ -113,7 +113,7 @@
         id="complemento"
         autocomplete="address-line2"
         placeholder="Apto 42, Bloco B"
-        [(ngModel)]="cliente.complemento"
+        [(ngModel)]="usuario.complemento"
       />
 
       <label for="bairro">Bairro</label>
@@ -124,7 +124,7 @@
         id="bairro"
         placeholder="Pinheiros"
         required
-        [(ngModel)]="cliente.bairro"
+        [(ngModel)]="usuario.bairro"
       />
 
       <label for="cidade">Cidade</label>
@@ -136,7 +136,7 @@
         autocomplete="address-level2"
         placeholder="São Paulo"
         required
-        [(ngModel)]="cliente.cidade"
+        [(ngModel)]="usuario.cidade"
       />
 
       <label for="estado">Estado</label>
@@ -149,7 +149,7 @@
         autocomplete="address-level1"
         placeholder="SP"
         required
-        [(ngModel)]="cliente.estado"
+        [(ngModel)]="usuario.estado"
       />
       <label for="senha">Senha</label>
     <input
@@ -160,7 +160,7 @@
       placeholder="Digite sua senha"
       minlength="6"
       required
-      [(ngModel)]="cliente.senha"
+      [(ngModel)]="usuario.senha"
     />
     <label for="confirmarSenha">Confirmar senha</label>
     <input

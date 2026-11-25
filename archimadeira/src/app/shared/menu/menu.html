@@ -11,12 +11,20 @@
         <img src="/assets/icons/cart.svg" alt="" class="menu__icon">
         <span>Carrinho</span>
       </a>
-      <a routerLink="/admin/produtos" routerLinkActive="menu__link--ativo" class="menu__link">Painel Admin</a>
+      @if (authService.usuarioAtual?.tipo === 'admin') {
+        <a routerLink="/admin/produtos" routerLinkActive="menu__link--ativo" class="menu__link">Painel Admin</a>
+        <a routerLink="/admin/usuarios" routerLinkActive="menu__link--ativo" class="menu__link">Usuários</a>
+      }
     </nav>
 
     <div class="cabecalho__acoes">
-      <a routerLink="/login" class="cabecalho__entrar" aria-label="Entrar, página de login em construção">Entrar</a>
-      <a routerLink="/cadastro" class="botao botao--escuro">Cadastre-se</a>
+      @if (authService.usuarioAtual) {
+        <span>{{ authService.usuarioAtual.nome }}</span>
+        <button type="button" class="cabecalho__entrar" (click)="sair()">Sair</button>
+      } @else {
+        <a routerLink="/login" class="cabecalho__entrar" aria-label="Entrar">Entrar</a>
+        <a routerLink="/cadastro" class="botao botao--escuro">Cadastre-se</a>
+      }
     </div>
   </div>
 </header>

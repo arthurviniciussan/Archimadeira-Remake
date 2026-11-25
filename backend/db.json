@@ -1,5 +1,5 @@
 {
-  "clientes": [
+  "usuarios": [
     {
       "id": "1",
       "cpf": "12345678901",
@@ -13,7 +13,9 @@
       "complemento": "Apto 42",
       "bairro": "Bela Vista",
       "cidade": "São Paulo",
-      "estado": "SP"
+      "estado": "SP",
+      "senha": "usuario123",
+      "tipo": "usuario"
     },
     {
       "cpf": "123123123.32",
@@ -28,13 +30,31 @@
       "bairro": "casa da mae joana",
       "cidade": "lugar",
       "estado": "Sampa",
-      "id": "rmaYZwdRc8U"
+      "id": "rmaYZwdRc8U",
+      "senha": "usuario123",
+      "tipo": "usuario"
+    },
+    {
+      "id": "admin-1",
+      "cpf": "00000000000",
+      "nome": "Administrador",
+      "sobrenome": "Archimadeira",
+      "dtNascimento": "1990-01-01",
+      "email": "admin@archimadeira.com",
+      "cep": "00000-000",
+      "logradouro": "Rua Administrativa",
+      "numeroCasa": "1",
+      "complemento": "",
+      "bairro": "Centro",
+      "cidade": "São Paulo",
+      "estado": "SP",
+      "senha": "admin123",
+      "tipo": "admin"
     }
   ],
-  {
   "produtos": [
     {
-      "id": "1",
+      "id": 1,
       "nome": "Sofá 3 Lugares Retrátil e Reclinável",
       "descricao": "Sofá confortável de 3 lugares com assentos retráteis e encosto reclinável.",
       "estoque": 10,
@@ -43,7 +63,7 @@
       "imagem": "/assets/images/sofa3lugares.jpeg"
     },
     {
-      "id": "2",
+      "id": 2,
       "nome": "Sofá Retrátil Aramis 2 lugares - 2,90m",
       "descricao": "Sofá modelo Aramis de 2 lugares com abertura retrátil e 2,90m de largura.",
       "estoque": 8,
@@ -52,7 +72,7 @@
       "imagem": "/assets/images/sofa2lugares.jpeg"
     },
     {
-      "id": "3",
+      "id": 3,
       "nome": "Cama de Casal Madeira Maciça",
       "descricao": "Cama de casal resistente fabricada em madeira maciça nobre.",
       "estoque": 5,
@@ -61,7 +81,7 @@
       "imagem": "/assets/images/camaNogueira.jpg"
     },
     {
-      "id": "4",
+      "id": 4,
       "nome": "Mesa de jantar redonda 6 lugares",
       "descricao": "Mesa de jantar com tampo redondo ideal para acomodar até 6 pessoas.",
       "estoque": 12,
@@ -70,39 +90,23 @@
       "imagem": "/assets/images/mesa.jpg"
     },
     {
-      "nome": "cadeira",
-      "descricao": "pika",
-      "estoque": 67,
-      "preco": 200,
+      "nome": "guarda-roupa",
+      "descricao": "bocud",
+      "estoque": 76,
+      "preco": 5,
+      "imagem": "/assets/images/camaNogueira.jpg",
+      "id": 5
+    },
+    {
+      "nome": "tutu",
+      "descricao": "tuttu bum bum",
+      "estoque": 2,
+      "preco": 67,
       "imagem": "/assets/images/mesa-jantar.png",
-      "id": "OMr2XfZhxUs"
-    },
-    {
-      "nome": "cadeira",
-      "descricao": "pika",
-      "estoque": 1200,
-      "preco": 200,
-      "imagem": "/assets/images/mesa.jpg",
-      "id": "4FE-GwZFe8k"
-    },
-    {
-      "nome": "cadeira",
-      "descricao": "tipo",
-      "estoque": 67,
-      "preco": 250,
-      "imagem": "/assets/images/mesa-jantar.png",
-      "id": "qa9TZjQ-Pn4"
-    },
-    {
-      "nome": "mesa piroca",
-      "descricao": "pika",
-      "estoque": 67,
-      "preco": 200,
-      "imagem": "/assets/images/mesa.jpg",
-      "id": "cGGBEye"
+      "id": 6
     }
   ],
-   "carrinho": [
+  "carrinho": [
     {
       "id": "1",
       "produtoId": 1,
@@ -113,5 +117,6 @@
       "imagem": "/assets/images/sofa3lugares.jpeg"
     }
   ],
+  "pedidos": [],
   "$schema": "./node_modules/json-server/schema.json"
 }

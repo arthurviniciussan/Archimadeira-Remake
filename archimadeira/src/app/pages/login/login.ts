@@ -1,7 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { ClientesService } from '../../services/clientes.service';
+import { AuthService } from '../../services/auth.service';
+import { UsuariosService } from '../../services/usuarios.service';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,8 @@ import { ClientesService } from '../../services/clientes.service';
   imports: [FormsModule, RouterLink],
 })
 export class LoginComponent {
-  private readonly clientesService = inject(ClientesService);
+  private readonly usuariosService = inject(UsuariosService);
+  private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
 
   email = '';
@@ -23,15 +25,16 @@ export class LoginComponent {
     this.erro = '';
     this.verificando = true;
 
-    this.clientesService.autenticar(this.email, this.senha).subscribe({
-      next: (cliente) => {
+    this.usuariosService.autenticar(this.email, this.senha).subscribe({
+      next: (usuario) => {
         this.verificando = false;
-        if (!cliente) {
+        if (!usuario) {
           this.erro = 'E-mail ou senha inválidos.';
           return;
         }
 
-        this.router.navigate(['/']);
+        this.authService.entrar(usuario);
+        this.router.navigate([usuario.tipo === 'admin' ? '/admin/produtos' : '/']);
       },
       error: () => {
         this.erro = 'Não foi possível validar o login. Verifique se o JSON Server está em execução.';

@@ -44,6 +44,17 @@ To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use th
 ng test
 ```
 
+## Local CRUD testing
+
+Start the JSON Server with `npm run backend` while in the `archimadeira` directory. It uses `../backend/db.json`.
+
+The admin panel is available to accounts with the `admin` type. A development account is seeded in the database:
+
+- E-mail: `admin@archimadeira.com`
+- Senha: `admin123`
+
+New registrations are regular users. The `pedidos` collection stores the cart items and total when a purchase is finalized. Passwords are plain text because this project uses JSON Server as a local mock backend; do not use these credentials or this password storage approach in production.
+
 ## Running end-to-end tests
 
 For end-to-end (e2e) testing, run:

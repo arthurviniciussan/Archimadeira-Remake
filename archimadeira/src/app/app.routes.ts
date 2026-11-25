@@ -3,7 +3,7 @@ import { CadastroComponent } from './pages/cadastro/cadastro';
 import { CarrinhoComponent } from './pages/carrinho/carrinho';
 import { HomeComponent } from './pages/home/home';
 import { LoginComponent } from './pages/login/login';
-import { AdminClientesComponent } from './pages/admin/clientes/clientes';
+import { AdminUsuariosComponent } from './pages/admin/usuarios/usuarios';
 import { AdminProdutosComponent } from './pages/admin/produtos/produtos';
 import { Produtos } from './pages/produtos/produtos';
 import { EditarProduto } from './pages/produtos/editar-produto/editar-produto';
@@ -13,9 +13,10 @@ export const routes: Routes = [
 	{ path: '', component: HomeComponent },
 	{ path: 'cadastro', component: CadastroComponent },
 	{ path: 'carrinho', component: CarrinhoComponent },
-	{ path: 'admin/clientes', component: AdminClientesComponent },
+	{ path: 'admin/usuarios', component: AdminUsuariosComponent },
 	{ path: 'admin/produtos', component: AdminProdutosComponent },
-	{ path: 'clientes', redirectTo: 'admin/clientes', pathMatch: 'full' },
+	{ path: 'admin/clientes', redirectTo: 'admin/usuarios', pathMatch: 'full' },
+	{ path: 'clientes', redirectTo: 'admin/usuarios', pathMatch: 'full' },
 	{ path: 'manutencao-produtos', redirectTo: 'admin/produtos', pathMatch: 'full' },
 	{ path: 'login', component: LoginComponent },
 	{ path: 'produtos', component: Produtos },
