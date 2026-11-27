@@ -5,7 +5,7 @@
       <span class="badge">COLEÇÃO EXCLUSIVA 2026</span>
       <h1>MÓVEIS DE QUALIDADE A UM CLIQUE DE VOCÊ</h1>
       <p>Design autoral, madeira maciça certificada e acabamento premium para transformar a atmosfera do seu lar com conforto inigualável.</p>
-      <a class="btn-primary" routerLink="/produtos/consulta">CONFIRA ➔</a>
+      <a class="btn-primary" href="#produtos">CONFIRA ➔</a>
     </div>
   </section>
 
@@ -23,13 +23,18 @@
   </section>
 
   <section class="section-container">
-    <div class="section-header">
+    <div class="section-header" id="produtos">
       <h2>Listagem de Produtos</h2>
       <a routerLink="/carrinho" class="link-catalogo">Ver carrinho</a>
     </div>
 
     @if (erro) {
-      <p role="alert">{{ erro }}</p>
+      <p role="alert">
+        {{ erro }}
+        @if (!authService.usuarioAtual) {
+          <a routerLink="/login">Entrar</a>
+        }
+      </p>
     }
     @if (mensagem) {
       <p role="status">{{ mensagem }} <a routerLink="/carrinho">Ir para o carrinho</a></p>

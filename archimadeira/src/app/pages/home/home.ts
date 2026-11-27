@@ -1,9 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Observable } from 'rxjs';
 import { Produto } from '../../models/produto.model';
-import { ItemCarrinho, NovoItemCarrinho } from '../../models/item-carrinho.model';
+import { AuthService } from '../../services/auth.service';
 import { CarrinhoService } from '../../services/carrinho.service';
 import { ProdutosService } from '../../services/produtos.services';
 
@@ -21,6 +20,7 @@ interface ProdutoVitrine extends Produto {
 export class HomeComponent implements OnInit {
   produtosService = inject(ProdutosService);
   carrinhoService = inject(CarrinhoService);
+  authService = inject(AuthService);
 
   erro = '';
   mensagem = '';
@@ -63,53 +63,25 @@ export class HomeComponent implements OnInit {
     this.erro = '';
     this.mensagem = '';
 
+    const usuario = this.authService.usuarioAtual;
+    if (!usuario) {
+      this.erro = 'Entre na sua conta para adicionar produtos ao carrinho.';
+      return;
+    }
+
     if (produto.estoque < 1) {
       this.erro = 'Produto sem estoque.';
       return;
     }
 
-    const novoItem: NovoItemCarrinho = {
-      produtoId: produto.id,
-      nome: produto.nome,
-      preco: produto.preco,
-      quantidade: 1,
-      estoque: produto.estoque,
-      imagem: produto.imagem,
-    };
-
-    this.carrinhoService.listar().subscribe({
-      next: (itens) => {
-        const existente = itens.find((item) => item.produtoId === produto.id);
-        if (existente && existente.quantidade >= produto.estoque) {
-          this.erro = `Só temos ${produto.estoque} unidades em estoque.`;
-          return;
-        }
-
-        const requisicao = existente
-          ? this.carrinhoService.alterar({
-            ...existente,
-            quantidade: existente.quantidade + 1,
-            estoque: produto.estoque,
-            preco: produto.preco,
-            imagem: produto.imagem,
-          })
-          : this.carrinhoService.incluir(novoItem);
-
-        this.finalizarAdicao(requisicao);
+    this.carrinhoService.adicionar(usuario.id, produto.id, produto.estoque).subscribe({
+      next: () => {
+        this.mensagem = `${produto.nome} foi adicionado ao carrinho.`;
       },
-      error: () => {
-        this.erro = 'Não foi possível consultar o carrinho. Verifique se o JSON Server está em execução.';
-      },
-    });
-  }
-
-  private finalizarAdicao(requisicao: Observable<ItemCarrinho>): void {
-    requisicao.subscribe({
-      next: (item) => {
-        this.mensagem = `${item.nome} foi adicionado ao carrinho.`;
-      },
-      error: () => {
-        this.erro = 'Não foi possível adicionar o produto ao carrinho. Tente novamente.';
+      error: (error: unknown) => {
+        this.erro = error instanceof Error && error.name === 'Error'
+          ? error.message
+          : 'Não foi possível adicionar o produto ao carrinho. Tente novamente.';
       },
     });
   }

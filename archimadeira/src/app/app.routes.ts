@@ -5,9 +5,6 @@ import { HomeComponent } from './pages/home/home';
 import { LoginComponent } from './pages/login/login';
 import { AdminUsuariosComponent } from './pages/admin/usuarios/usuarios';
 import { AdminProdutosComponent } from './pages/admin/produtos/produtos';
-import { Produtos } from './pages/produtos/produtos';
-import { EditarProduto } from './pages/produtos/editar-produto/editar-produto';
-import { ConsultaProdutos } from './pages/produtos/consulta-produtos/consulta-produtos';
 
 export const routes: Routes = [
 	{ path: '', component: HomeComponent },
@@ -15,12 +12,12 @@ export const routes: Routes = [
 	{ path: 'carrinho', component: CarrinhoComponent },
 	{ path: 'admin/usuarios', component: AdminUsuariosComponent },
 	{ path: 'admin/produtos', component: AdminProdutosComponent },
-	{ path: 'admin/clientes', redirectTo: 'admin/usuarios', pathMatch: 'full' },
-	{ path: 'clientes', redirectTo: 'admin/usuarios', pathMatch: 'full' },
-	{ path: 'manutencao-produtos', redirectTo: 'admin/produtos', pathMatch: 'full' },
+	{ path: 'admin/clientes', redirectTo: 'admin/usuarios' },
+	{ path: 'clientes', redirectTo: 'admin/usuarios' },
+	{ path: 'manutencao-produtos', redirectTo: 'admin/produtos'},
 	{ path: 'login', component: LoginComponent },
-	{ path: 'produtos', component: Produtos },
-	{ path: 'editar-produto', component: EditarProduto }, 
-	{ path: 'produtos/consulta', component: ConsultaProdutos }, 
+	{ path: 'produtos', redirectTo: '', pathMatch: 'full' },
+	{ path: 'editar-produto', redirectTo: 'admin/produtos', pathMatch: 'full' },
+	{ path: 'produtos/consulta', redirectTo: '', pathMatch: 'full' },
 	{ path: '**', redirectTo: '' }
 ];
