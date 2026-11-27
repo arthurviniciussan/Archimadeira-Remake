@@ -155,7 +155,22 @@
   font-size: 0.95rem;
   font-weight: 600;
   margin-bottom: 10px;
-  height: 40px;
+  min-height: 40px;
+}
+
+.produto-info h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  min-height: 40px;
+}
+
+.produto-info .descricao {
+  color: #5B514B;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  min-height: 3.8em;
+  margin-bottom: 12px;
 }
 
 .preco {

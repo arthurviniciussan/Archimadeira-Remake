@@ -1,5 +1,5 @@
 export interface Usuario {
-  id: number | string;
+  id: number;
   cpf: string;
   nome: string;
   sobrenome: string;
@@ -34,7 +34,7 @@ export interface NovoUsuario {
 }
 
 export interface SessaoUsuario {
-  id: number | string;
+  id: number;
   nome: string;
   email: string;
   tipo: 'admin' | 'usuario';

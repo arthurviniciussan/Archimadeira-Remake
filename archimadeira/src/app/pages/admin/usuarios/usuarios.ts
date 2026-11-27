@@ -63,7 +63,7 @@ export class AdminUsuariosComponent implements OnInit {
     });
   }
 
-  excluir(id: number | string): void {
+  excluir(id: number): void {
     if (!confirm('Deseja realmente excluir este usuário?')) {
       return;
     }

@@ -12,6 +12,7 @@
     <p class="selo">Cesto curado &amp; marcenaria exclusiva</p>
     <h1>Carrinho de Compras</h1>
   </header>
+  <a class="botao-voltar" routerLink="/">Voltar para o catálogo</a>
 
   @if (erro) {
     <p role="alert">{{ erro }}</p>
@@ -24,58 +25,42 @@
   }
 
   <div class="grade">
-    <div>
-      <section class="cartao adicionar">
-        <h2 class="cartao__titulo">Adicionar produto</h2>
-        <ul class="lista-produtos">
-          @for (produto of listaProdutos; track produto.id) {
-            <li class="produto">
-              <img class="produto__imagem" [src]="produto.imagem" [alt]="produto.nome">
-              <span class="produto__nome">{{ produto.nome }}</span>
-              <span class="produto__info">{{ produto.preco | currency:'BRL':'symbol':'1.2-2':'pt-BR' }} · Estoque: {{ produto.estoque }}</span>
-              <button type="button" class="botao--principal produto__botao" (click)="adicionar(produto)" [disabled]="produto.estoque < 1 || finalizando || pedidoRegistrado || !authService.usuarioAtual">Adicionar</button>
-            </li>
-          }
-        </ul>
-      </section>
+    <section class="cartao carrinho">
+      <header class="carrinho__cabecalho">
+        <h2 class="cartao__titulo">Seu Carrinho <span class="carrinho__contador">({{ listaItens.length }} itens)</span></h2>
+        <button type="button" class="link link--perigo" (click)="esvaziar()" [disabled]="listaItens.length === 0 || finalizando">Esvaziar carrinho</button>
+      </header>
 
-      <section class="cartao carrinho">
-        <header class="carrinho__cabecalho">
-          <h2 class="cartao__titulo">Seu Carrinho <span class="carrinho__contador">({{ listaItens.length }} itens)</span></h2>
-          <button type="button" class="link link--perigo" (click)="esvaziar()" [disabled]="listaItens.length === 0 || finalizando">Esvaziar carrinho</button>
-        </header>
+      <ul class="lista-itens">
+        @for (item of listaItens; track item.produtoId) {
+          <li class="item">
+            <div class="item__imagem">
+              <img [src]="item.produto?.imagem || '/assets/images/mesa.jpg'" [alt]="item.produto?.nome || 'Produto não encontrado'">
+            </div>
 
-        <ul class="lista-itens">
-          @for (item of listaItens; track item.produtoId) {
-            <li class="item">
-              <div class="item__imagem">
-                <img [src]="item.produto?.imagem || '/assets/images/mesa.jpg'" [alt]="item.produto?.nome || 'Produto não encontrado'">
+            <div class="item__dados">
+              <h3 class="item__nome">{{ item.produto?.nome || 'Produto não encontrado' }}</h3>
+              @if (item.produto) {
+                <p class="item__estoque">Estoque: {{ item.produto.estoque }} unidades</p>
+              }
+              <div class="quantidade">
+                <button type="button" class="quantidade__botao" (click)="diminuir(item)" [disabled]="finalizando || pedidoRegistrado">&minus;</button>
+                <span class="quantidade__valor">{{ item.quantidade }}</span>
+                <button type="button" class="quantidade__botao" (click)="aumentar(item)" [disabled]="finalizando || pedidoRegistrado">+</button>
               </div>
+            </div>
 
-              <div class="item__dados">
-                <h3 class="item__nome">{{ item.produto?.nome || 'Produto não encontrado' }}</h3>
-                @if (item.produto) {
-                  <p class="item__estoque">Estoque: {{ item.produto.estoque }} unidades</p>
-                }
-                <div class="quantidade">
-                  <button type="button" class="quantidade__botao" (click)="diminuir(item)" [disabled]="finalizando || pedidoRegistrado">&minus;</button>
-                  <span class="quantidade__valor">{{ item.quantidade }}</span>
-                  <button type="button" class="quantidade__botao" (click)="aumentar(item)" [disabled]="finalizando || pedidoRegistrado">+</button>
-                </div>
+            <div class="item__valores">
+              <p class="item__unitario">Unitário: {{ (item.produto?.preco || 0) | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</p>
+              <p class="item__total">{{ (item.produto?.preco || 0) * item.quantidade | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</p>
+              <div class="item__acoes">
+                <button type="button" class="link" (click)="remover(item.produtoId)" [disabled]="finalizando || pedidoRegistrado">Remover</button>
               </div>
-
-              <div class="item__valores">
-                <p class="item__unitario">Unitário: {{ (item.produto?.preco || 0) | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</p>
-                <p class="item__total">{{ (item.produto?.preco || 0) * item.quantidade | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</p>
-                <div class="item__acoes">
-                  <button type="button" class="link" (click)="remover(item.produtoId)" [disabled]="finalizando || pedidoRegistrado">Remover</button>
-                </div>
-              </div>
-            </li>
-          }
-        </ul>
-      </section>
-    </div>
+            </div>
+          </li>
+        }
+      </ul>
+    </section>
 
     <aside class="resumo-lateral">
       <section class="cartao resumo">

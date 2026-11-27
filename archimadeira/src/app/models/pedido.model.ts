@@ -8,7 +8,7 @@ export interface ItemPedido {
 }
 
 export interface NovoPedido {
-  usuarioId: number | string | null;
+  usuarioId: number;
   usuarioEmail: string | null;
   data: string;
   produtos: ItemPedido[];
@@ -16,8 +16,8 @@ export interface NovoPedido {
 }
 
 export interface Pedido {
-  id: number | string;
-  usuarioId: number | string | null;
+  id: number;
+  usuarioId: number;
   usuarioEmail: string | null;
   data: string;
   produtos: ItemPedido[];

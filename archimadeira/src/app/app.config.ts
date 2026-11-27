@@ -6,7 +6,7 @@ import localePt from '@angular/common/locales/pt';
 
 import { routes } from './app.routes';
 
-registerLocaleData(localePt);
+registerLocaleData(localePt, 'pt-BR');
 
 export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideHttpClient()]

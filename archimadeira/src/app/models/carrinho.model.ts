@@ -4,9 +4,7 @@ export interface ItemCarrinho {
 }
 
 export interface Carrinho {
-  id: number | string;
-  usuarioId: number | string;
+  id: number;
+  usuarioId: number;
   itens: ItemCarrinho[];
 }
-
-export type NovoCarrinho = Omit<Carrinho, 'id'>;

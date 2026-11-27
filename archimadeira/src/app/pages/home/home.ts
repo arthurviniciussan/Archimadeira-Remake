@@ -1,14 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Produto } from '../../models/produto.model';
 import { AuthService } from '../../services/auth.service';
 import { CarrinhoService } from '../../services/carrinho.service';
 import { ProdutosService } from '../../services/produtos.services';
-
-interface ProdutoVitrine extends Produto {
-  desconto?: string;
-}
 
 @Component({
   selector: 'app-home',
@@ -17,13 +12,17 @@ interface ProdutoVitrine extends Produto {
   templateUrl: './home.html',
   styleUrls: ['./home.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
+  private readonly changeDetector = inject(ChangeDetectorRef);
+  private readonly timersAdicionado = new Map<number, ReturnType<typeof setTimeout>>();
   produtosService = inject(ProdutosService);
   carrinhoService = inject(CarrinhoService);
   authService = inject(AuthService);
 
   erro = '';
-  mensagem = '';
+  erroProdutos = '';
+  carregandoProdutos = true;
+  readonly produtosAdicionados = new Set<number>();
 
   categorias = [
     { nome: 'Salas & Sofás', detalhe: 'Mais de 140 modelos', imagem: '/assets/images/sofa2lugares.jpeg' },
@@ -32,57 +31,60 @@ export class HomeComponent implements OnInit {
     { nome: 'Escritório', detalhe: 'Mesas e estantes de trabalho', imagem: '/assets/images/escritorio.avif' }
   ];
 
-  produtos: ProdutoVitrine[] = [];
-
-  descontosPorNome: Record<string, string> = {
-    'Sofá 3 Lugares Retrátil e Reclinável': '10% OFF',
-    'Sofá Retrátil Aramis 2 lugares - 2,90m': '8% OFF',
-    'Cama de Casal Madeira Maciça': 'MADEIRA NOBRE',
-    'Mesa de jantar redonda 6 lugares': '30% OFF',
-  };
+  produtos: ProdutoCard[] = [];
 
   ngOnInit(): void {
-    this.produtosService.listar().subscribe({
-      next: (produtos) => {
-        this.produtos = produtos.map((produto) => {
-          const desconto = this.descontosPorNome[produto.nome];
-          return {
-            ...produto,
-            ...(desconto ? { desconto } : {}),
-          };
-        });
-        this.erro = '';
-      },
-      error: () => {
-        this.erro = 'Não foi possível carregar os produtos. Verifique se o JSON Server está em execução.';
-      },
+    this.produtosService.listar().subscribe((produtos) => {
+      this.produtos = produtos.map(({ id, nome, descricao, preco, imagem, estoque }) => ({
+        id,
+        nome,
+        descricao,
+        preco,
+        imagem,
+        estoque,
+      }));
+      this.carregandoProdutos = false;
+      this.changeDetector.markForCheck();
     });
   }
 
-  adicionarAoCarrinho(produto: Produto): void {
-    this.erro = '';
-    this.mensagem = '';
+  ngOnDestroy(): void {
+    for (const timer of this.timersAdicionado.values()) {
+      clearTimeout(timer);
+    }
+    this.timersAdicionado.clear();
+  }
 
+  async adicionarAoCarrinho(produto: ProdutoCard): Promise<void> {
     const usuario = this.authService.usuarioAtual;
     if (!usuario) {
-      this.erro = 'Entre na sua conta para adicionar produtos ao carrinho.';
       return;
     }
 
-    if (produto.estoque < 1) {
-      this.erro = 'Produto sem estoque.';
-      return;
+    await this.carrinhoService.adicionar(usuario.id, produto.id, produto.estoque);
+    this.produtosAdicionados.add(produto.id);
+
+    const timerAnterior = this.timersAdicionado.get(produto.id);
+    if (timerAnterior !== undefined) {
+      clearTimeout(timerAnterior);
     }
 
-    this.carrinhoService.adicionar(usuario.id, produto.id, produto.estoque).subscribe({
-      next: () => {
-        this.mensagem = `${produto.nome} foi adicionado ao carrinho.`;
-      },
-      error: (error: unknown) => {
-        this.erro = error instanceof Error && error.name === 'Error'
-          ? error.message
-          : 'Não foi possível adicionar o produto ao carrinho. Tente novamente.';
-      },
-    });
+    const timer = setTimeout(() => {
+      this.produtosAdicionados.delete(produto.id);
+      this.timersAdicionado.delete(produto.id);
+      this.changeDetector.markForCheck();
+    }, 1000);
+    this.timersAdicionado.set(produto.id, timer);
+
+    this.changeDetector.markForCheck();
   }
+}
+
+interface ProdutoCard {
+  id: number;
+  nome: string;
+  descricao: string;
+  preco: number;
+  imagem: string;
+  estoque: number;
 }

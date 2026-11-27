@@ -28,6 +28,9 @@
       <a routerLink="/carrinho" class="link-catalogo">Ver carrinho</a>
     </div>
 
+    @if (erroProdutos) {
+      <p role="alert">{{ erroProdutos }}</p>
+    }
     @if (erro) {
       <p role="alert">
         {{ erro }}
@@ -36,24 +39,35 @@
         }
       </p>
     }
-    @if (mensagem) {
-      <p role="status">{{ mensagem }} <a routerLink="/carrinho">Ir para o carrinho</a></p>
-    }
+    @if (carregandoProdutos) {
+      <p role="status">Carregando produtos...</p>
+    } @else if (produtos.length === 0 && !erroProdutos) {
+      <p role="status">Nenhum produto disponível no momento.</p>
+    } @else {
+      <div class="grid-produtos">
+        @for (prod of produtos; track prod.id) {
+          <article class="card-produto">
+            <img class="img-placeholder-produto" [src]="prod.imagem" [alt]="prod.nome">
 
-    <div class="grid-produtos">
-      <div class="card-produto" *ngFor="let prod of produtos">
-        <span class="tag-desconto" *ngIf="prod.desconto">{{ prod.desconto }}</span>
-        <img class="img-placeholder-produto" [src]="prod.imagem" [alt]="prod.nome">
-        
-        <div class="produto-info">
-          <h4>{{ prod.nome }}</h4>
-          <p class="preco">{{ prod.preco | currency:'BRL':'symbol':'1.2-2':'pt-BR' }} <span class="avista">à vista</span></p>
-          <button class="btn-secundary" type="button" (click)="adicionarAoCarrinho(prod)" [disabled]="prod.estoque < 1">
-            {{ prod.estoque > 0 ? '🛒 Adicionar ao carrinho' : 'Sem estoque' }}
-          </button>
-        </div>
+            <div class="produto-info">
+              <h3>{{ prod.nome }}</h3>
+              <p class="descricao">{{ prod.descricao }}</p>
+              <p class="preco">{{ prod.preco | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</p>
+              <button
+                class="btn-secundary"
+                type="button"
+                (click)="adicionarAoCarrinho(prod)"
+                [disabled]="prod.estoque < 1"
+                [attr.aria-label]="produtosAdicionados.has(prod.id) ? 'Adicionado ao carrinho' : 'Adicionar ' + prod.nome + ' ao carrinho'"
+                [title]="prod.estoque < 1 ? 'Produto sem estoque' : produtosAdicionados.has(prod.id) ? 'Adicionado ao carrinho' : 'Adicionar ao carrinho'"
+              >
+                {{ produtosAdicionados.has(prod.id) ? 'Adicionado' : 'Adicionar ao Carrinho' }}
+              </button>
+            </div>
+          </article>
+        }
       </div>
-    </div>
+    }
   </section>
 
 </main>

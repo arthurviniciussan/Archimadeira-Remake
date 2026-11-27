@@ -249,46 +249,16 @@ button {
   cursor: pointer;
 }
 
-.adicionar {
+.botao-voltar {
+  display: inline-block;
+  padding: 10px 16px;
   margin-bottom: 24px;
+  border: 1px solid var(--cor-madeira);
+  border-radius: var(--raio);
+  color: var(--cor-madeira);
+  text-decoration: none;
 }
-.lista-produtos {
-  margin: 16px 0 0;
-  padding: 0;
-  list-style: none;
-}
-.produto {
-  display: grid;
-  grid-template-columns: 48px minmax(0, 1fr) auto auto;
-  align-items: center;
-  gap: 16px;
-  padding: 12px 0;
-  border-top: 1px solid var(--cor-borda);
-}
-.produto__imagem {
-  width: 48px;
-  height: 48px;
-  object-fit: cover;
-}
-.produto__nome {
-  font-family: 'PT Serif', Georgia, serif;
-  font-size: 16px;
-  font-weight: 600;
-}
-.produto__info {
-  color: var(--cor-texto-suave);
-  font-size: 12px;
-}
-.produto__botao {
-  width: auto;
-  padding: 10px 18px;
-}
-
-@media (max-width: 900px) {
-  .grade {
-    grid-template-columns: 1fr;
-  }
-  .resumo-lateral {
-    position: static;
-  }
+.botao-voltar:hover {
+  background: var(--cor-madeira);
+  color: #fff;
 }

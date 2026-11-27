@@ -74,7 +74,7 @@
       "id": 1,
       "nome": "Sofá 3 Lugares Retrátil e Reclinável",
       "descricao": "Sofá confortável de 3 lugares com assentos retráteis e encosto reclinável.",
-      "estoque": 10,
+      "estoque": 9,
       "preco": 5900,
       "desconto": "10% OFF",
       "imagem": "/assets/images/sofa3lugares.jpeg"
@@ -83,7 +83,7 @@
       "id": 2,
       "nome": "Sofá Retrátil Aramis 2 lugares - 2,90m",
       "descricao": "Sofá modelo Aramis de 2 lugares com abertura retrátil e 2,90m de largura.",
-      "estoque": 8,
+      "estoque": 7,
       "preco": 5400,
       "desconto": "8% OFF",
       "imagem": "/assets/images/sofa2lugares.jpeg"
@@ -131,10 +131,44 @@
         {
           "produtoId": 1,
           "quantidade": 1
+        },
+        {
+          "produtoId": 2,
+          "quantidade": 1
+        },
+        {
+          "produtoId": 3,
+          "quantidade": 1
         }
       ]
     }
   ],
-  "pedidos": [],
+  "pedidos": [
+    {
+      "usuarioId": 1,
+      "usuarioEmail": "ana.silva@example.com",
+      "data": "2026-11-27T01:26:32.136Z",
+      "produtos": [
+        {
+          "produtoId": 1,
+          "nome": "Sofá 3 Lugares Retrátil e Reclinável",
+          "preco": 5900,
+          "quantidade": 1,
+          "estoque": 10,
+          "imagem": "/assets/images/sofa3lugares.jpeg"
+        },
+        {
+          "produtoId": 2,
+          "nome": "Sofá Retrátil Aramis 2 lugares - 2,90m",
+          "preco": 5400,
+          "quantidade": 1,
+          "estoque": 8,
+          "imagem": "/assets/images/sofa2lugares.jpeg"
+        }
+      ],
+      "total": 11300,
+      "id": 1
+    }
+  ],
   "$schema": "./node_modules/json-server/schema.json"
 }

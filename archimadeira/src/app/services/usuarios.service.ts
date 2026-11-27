@@ -26,11 +26,11 @@ export class UsuariosService {
     return this.http.post<Usuario>(this.api, usuario);
   }
 
-  excluir(id: number | string): Observable<void> {
+  excluir(id: number): Observable<void> {
     return this.http.delete<void>(`${this.api}/${id}`);
   }
 
-  buscarPorID(id: number | string): Observable<Usuario> {
+  buscarPorID(id: number): Observable<Usuario> {
     return this.http.get<Usuario>(`${this.api}/${id}`);
   }
 
